@@ -54,5 +54,5 @@ See PRD.md. In one line: a fantasy league where users ("scouts") draft rising mu
 ## Current status
 Update this section at the end of every session with what's done and what's next.
 
-- **2026-11-14, Step 1 done (pending Supabase keys):** Expo SDK 58 app with Expo Router + TypeScript, home screen showing database connection status, `.env.example` template, Supabase CLI. Waiting on Faraz to create the Supabase project and add URL + anon key to `.env`.
+- **2026-11-14, Step 1 done:** Expo SDK 58 app with Expo Router + TypeScript, home screen showing database connection status, `.env.example` template, Supabase CLI. Supabase project `bafhhlncbuqdhkpvsydw` connected (keys in `.env`). On public Wi-Fi, run `npm run tunnel` instead of `npm start` (ngrok tunnel, no Expo account needed).
 - **Next:** Step 2, database schema.
