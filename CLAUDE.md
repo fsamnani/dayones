@@ -23,7 +23,7 @@ See PRD.md. In one line: a fantasy league where users ("scouts") draft rising mu
 
 ## Rules
 - Never put API keys or secrets in code. Use environment variables in `.env`, and keep `.env` in `.gitignore`.
-- Scoring logic lives in one place (`/lib/scoring`) with tests, because it is the heart of the product and will be tuned often.
+- Scoring logic lives in one place (`src/lib/scoring`) with tests, because it is the heart of the product and will be tuned often.
 - Every stat stored must keep its source and the date it was fetched.
 - Store daily snapshots of talent stats; never overwrite history. The Ledger depends on it.
 - Keep it simple. No extra libraries unless they clearly save work, and say why when adding one.
@@ -44,5 +44,15 @@ See PRD.md. In one line: a fantasy league where users ("scouts") draft rising mu
 12. Day One share card
 13. TestFlight build for friends
 
+## Project layout
+- `src/app/` screens (every file is a screen, Expo Router)
+- `src/lib/` shared code; `src/lib/supabase.ts` database connection; `src/lib/scoring/` scoring engine
+- `supabase/` database migrations and edge functions (data jobs)
+- `AGENTS.md` Expo-specific coding rules (use `npx expo install`, check versioned Expo docs)
+- Supabase CLI is a project dev dependency: run it as `npx supabase ...`
+
 ## Current status
-Not started. Update this section at the end of every session with what's done and what's next.
+Update this section at the end of every session with what's done and what's next.
+
+- **2026-11-14, Step 1 done (pending Supabase keys):** Expo SDK 58 app with Expo Router + TypeScript, home screen showing database connection status, `.env.example` template, Supabase CLI. Waiting on Faraz to create the Supabase project and add URL + anon key to `.env`.
+- **Next:** Step 2, database schema.
