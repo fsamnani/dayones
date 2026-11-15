@@ -14,22 +14,23 @@ export const supabase = isSupabaseConfigured
     })
   : null;
 
-export type ConnectionStatus = 'missing-keys' | 'connected' | 'bad-key' | 'unreachable';
+export type ConnectionStatus = 'missing-keys' | 'connected' | 'no-tables' | 'bad-key' | 'unreachable';
+
+export type ConnectionResult = { status: ConnectionStatus; talentCount: number | null };
 
 /**
- * Pings the database. There are no tables yet, so we ask for one that
- * doesn't exist: a "table not found" reply proves the URL and key work.
+ * Pings the database by counting talent. "no-tables" means the keys work
+ * but the schema hasn't been applied yet.
  */
-export async function checkConnection(): Promise<ConnectionStatus> {
-  if (!supabase) return 'missing-keys';
+export async function checkConnection(): Promise<ConnectionResult> {
+  if (!supabase) return { status: 'missing-keys', talentCount: null };
   try {
-    const { error } = await supabase.from('_ping').select('*').limit(1);
-    if (!error) return 'connected';
-    if (error.code === 'PGRST205' || error.code === '42P01') return 'connected';
-    if (/jwt|api key|apikey|unauthorized|invalid/i.test(error.message)) return 'bad-key';
-    if (/fetch|network/i.test(error.message)) return 'unreachable';
-    return 'connected';
+    const { count, error } = await supabase.from('talent').select('*', { count: 'exact', head: true });
+    if (!error) return { status: 'connected', talentCount: count ?? 0 };
+    if (error.code === 'PGRST205' || error.code === '42P01') return { status: 'no-tables', talentCount: null };
+    if (/jwt|api key|apikey|unauthorized|invalid/i.test(error.message)) return { status: 'bad-key', talentCount: null };
+    return { status: 'unreachable', talentCount: null };
   } catch {
-    return 'unreachable';
+    return { status: 'unreachable', talentCount: null };
   }
 }

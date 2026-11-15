@@ -55,4 +55,7 @@ See PRD.md. In one line: a fantasy league where users ("scouts") draft rising mu
 Update this section at the end of every session with what's done and what's next.
 
 - **2026-11-14, Step 1 done:** Expo SDK 58 app with Expo Router + TypeScript, home screen showing database connection status, `.env.example` template, Supabase CLI. Supabase project `bafhhlncbuqdhkpvsydw` connected (keys in `.env`). On public Wi-Fi, run `npm run tunnel` instead of `npm start` (ngrok tunnel, no Expo account needed).
-- **Next:** Step 2, database schema.
+- **2026-11-14, Step 2 written, not yet applied to Supabase:** schema in `supabase/migrations/20261114000000_initial_schema.sql` (15 tables, 2 views, access rules), tested locally against a throwaway Postgres (55 checks passed). Waiting on Faraz to run `npx supabase login`, `npx supabase link --project-ref bafhhlncbuqdhkpvsydw`, `npm run db:push`. Then run `npm run db:types` to generate `src/lib/database.types.ts`.
+- **Product decisions (2026-11-14):** talent is exclusive within a league; scouts can be in multiple leagues with separate rosters (Day One credit = earliest pick); weeks run Monday to Sunday Pacific, finalized Sunday night.
+- **Schema notes:** `platforms.is_tracked` separates stat sources from link-only platforms (Spotify, Apple Music, Instagram, TikTok, X, SoundCloud, Kick). `talent_rankings` view powers Trending. `league_posts` holds weekly recaps, announcements, and messages. Scouts cannot insert picks directly: drafting must go through server code (step 7) that sets size_at_draft and multiplier via `src/lib/scoring`. The 2 add/drops per week limit is also enforced there, not in the database.
+- **Next:** apply the schema, then Step 3, seed 30 to 50 talent.
