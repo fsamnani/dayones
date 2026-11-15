@@ -40,7 +40,11 @@ Faraz and 4 to 5 friends in SF who follow music, YouTube, and streamers, already
 
 **Rules**
 - Each talent has one primary position. Flex absorbs anyone.
-- Draftable only if DayOnes can track at least one Growth signal and one Heat signal for them. Talent with no trackable data (for example a SoundCloud-only artist) can be nominated but not drafted until a source exists.
+- **Draftable only if the platform where they have the most audience is one we track.** A creator with 3k YouTube subs but millions on Instagram is not draftable, because their score would not reflect reality. They are marked **nominated, untrackable** and kept on the bench until a data source exists for their main platform.
+  - For musicians, Last.fm stands in for their streaming audience (Spotify, Apple Music), since streaming is where a musician's audience lives. Their Instagram following does not disqualify them. *(Interpretation, pending Faraz's confirmation.)*
+  - Talent we are not sure about are draftable but **provisional** until the Instagram/TikTok spike test (section 10a) confirms their main platform.
+  - They must also have at least one Growth signal and one Heat signal we can track.
+- **The bench:** nominated talent we cannot score yet, each with the reason (for example "main platform is Kick"). When a data source for their platform comes online, they move to draftable.
 - Minimum draftable size: 1,000 on their primary platform. Stops scouts farming tiny accounts.
 - No organizations or publications (Eater, NYTimes). Talent must be a person or group who is the face. Creator-led shows count (Impaulsive).
 - Genre tags (podcast, food, gaming, reactions, IRL, comedy, sports, etc.) are for browsing and filtering, not positions.
@@ -120,7 +124,7 @@ Before anyone plays, test the scoring formula against history.
 
 ## 8. v1 features (must have)
 1. Sign up / sign in
-2. Talent profiles: position, tags, linked platforms, stats chart, recent news
+2. Talent profiles: position, tags, linked platforms, stats chart, recent news. **Every profile shows which platforms count toward scoring and which are link-only**, so scouts know before they draft.
 3. Browse and search talent (curated database, filter by position and tag)
 4. Draft and roster management (10 slots, positions, swaps)
 5. Daily data job: pulls stats, computes Audience Index, Heat, and points
@@ -149,8 +153,15 @@ Before anyone plays, test the scoring formula against history.
 | Last.fm API | Artist listeners and plays | Free. Current numbers only, no history |
 | Wikipedia Pageviews API | Daily page views per person | Free, strong buzz signal for notable talent. Has years of daily history (used for the backtest) |
 | Twitch API | Followers, live viewers | Verify access |
-| Kick | Followers, viewers | Verify public API before relying on it |
+| Kick | Live viewers only | Public API checked Nov 2026: live viewer counts yes, follower counts no. So Kick can give Heat but not Growth, and Kick-first streamers stay on the bench. Needs a Kick developer app (client credentials) |
 | Billboard | Chart entries | No official API; admin logs milestones in v1 |
+
+### 10a. Spike test: Instagram and TikTok data (before launch)
+Many talent are biggest on Instagram or TikTok. Before launch, test a paid source:
+- Run an Apify Social Blade actor against 10 talent we know well (start with the provisional talent).
+- Report: do the Instagram and TikTok follower numbers match reality, how fresh is the data, how far back does daily history go, and what would it cost per month for 200 talent updated daily.
+- Budget: under $20 for the test. Findings only; do not wire it into the app.
+- Outcome decides whether Instagram/TikTok become tracked platforms, which would move many bench talent to draftable, and confirms or rejects the provisional talent.
 
 Other platforms (Spotify, Apple Music, SoundCloud, Instagram, TikTok, X, Kick) can be linked on a talent's profile but are not scored until a usable data source exists.
 

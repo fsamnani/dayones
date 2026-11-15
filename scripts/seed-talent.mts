@@ -23,7 +23,12 @@ type SeedTalent = {
   position: Position;
   tags: string[];
   status: Status;
+  /** Internal note for us. Never shown in the app. */
   note?: string;
+  /** Why a nominated talent is held back, e.g. main platform untrackable. */
+  hold_reason?: string;
+  /** Draftable for now, but the spike test must confirm their main platform is tracked. */
+  provisional?: boolean;
   accounts: SeedAccount[];
 };
 
@@ -36,6 +41,7 @@ const HEAT_PLATFORMS = new Set(['youtube', 'wikipedia', 'twitch']);
 const KNOWN_PLATFORMS = new Set([
   'youtube', 'lastfm', 'wikipedia', 'twitch', 'kick', 'spotify', 'apple_music', 'soundcloud', 'instagram', 'tiktok', 'x',
 ]);
+const TRACKED_PLATFORMS = new Set([...GROWTH_PLATFORMS, ...HEAT_PLATFORMS]);
 const MIN_DRAFTABLE_SIZE = 1000;
 
 const seed = JSON.parse(readFileSync(new URL('../supabase/seed/talent.json', import.meta.url), 'utf8')) as SeedTalent[];
@@ -64,12 +70,21 @@ for (const t of seed) {
   if (t.status === 'draftable' && !(hasGrowth && hasHeat)) {
     problems.push(`${where}: marked draftable but lacks a Growth or Heat source`);
   }
+  // Eligibility rule (PRD 4): the primary account is their biggest platform, and it must be tracked.
+  const primary = t.accounts.find((a) => a.primary);
+  if (t.status === 'draftable' && primary && !TRACKED_PLATFORMS.has(primary.platform)) {
+    problems.push(`${where}: draftable but main platform ${primary.platform} is not tracked`);
+  }
+  if (t.status === 'nominated' && !t.hold_reason) problems.push(`${where}: nominated but no hold_reason`);
 }
 if (problems.length) {
   console.error('Seed file problems:\n  ' + problems.join('\n  '));
   process.exit(1);
 }
-console.log(`Seed file OK: ${seed.length} talent, ${seed.filter((t) => t.status === 'draftable').length} draftable`);
+console.log(
+  `Seed file OK: ${seed.length} talent, ${seed.filter((t) => t.status === 'draftable').length} draftable ` +
+    `(${seed.filter((t) => t.provisional).length} provisional), ${seed.filter((t) => t.status === 'nominated').length} on the bench`,
+);
 
 // ---------------------------------------------------------------------------
 // 2. Check links (YouTube size and Wikipedia page). Warnings only.
@@ -130,7 +145,7 @@ for (const t of seed) {
   const primary = t.accounts.find((a) => a.primary)!;
   const subs = primary.platform === 'youtube' && primary.external_id ? ytSubs.get(primary.external_id) : undefined;
   console.log(
-    `${pad(t.position, 9)} ${pad(t.status, 10)} ${pad(t.name, 24)} ${pad(primary.platform, 10)} ${subs !== undefined ? subs.toLocaleString() : ''}`,
+    `${pad(t.position, 9)} ${pad(t.provisional ? 'draftable*' : t.status, 10)} ${pad(t.name, 24)} ${pad(primary.platform, 10)} ${pad(subs !== undefined ? subs.toLocaleString() : '', 12)} ${t.hold_reason ?? ''}`,
   );
 }
 
@@ -153,7 +168,9 @@ for (const t of seed) {
   const { data: existing, error: findError } = await db.from('talent').select('id, status').eq('slug', t.slug).maybeSingle();
   if (findError) throw findError;
 
-  const row = { name: t.name, slug: t.slug, position: t.position, tags: t.tags, bio: t.note ?? null };
+  // Notes and hold reasons stay in the seed file for now (bio is public). A proper
+  // status_reason column comes with the profile screens.
+  const row = { name: t.name, slug: t.slug, position: t.position, tags: t.tags };
   let talentId: string;
   if (existing) {
     // Keep a hand-set "retired" status; otherwise follow the file.

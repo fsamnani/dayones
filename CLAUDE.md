@@ -36,15 +36,16 @@ See PRD.md. In one line: a fantasy league where users ("scouts") draft rising mu
 4. Daily data job: YouTube first, then Last.fm, Wikipedia, Twitch
 5. Scoring engine with tests (Growth, Heat, Milestones, Day One multiplier)
 6. Backtest: run the Heat formula on 12 months of Wikipedia pageviews for 30 talent, write up results with a chart (PRD 5g)
-7. Talent browse and profile screens
-8. Draft and roster screens
-9. My Team screen
-10. Leagues, invites, standings by season total points, weekly scoreboard, weekly head-to-head (bragging rights only)
-11. Trending tab
-12. Catalyst Calendar
-13. Feed
-14. Day One share card
-15. TestFlight build for friends
+7. Spike test: Apify Social Blade actor on 10 talent for Instagram/TikTok accuracy, freshness, history depth, and monthly cost for 200 talent. Budget under $20. Report only, do not wire in (PRD 10a)
+8. Talent browse and profile screens (show which platforms count toward scoring vs link-only)
+9. Draft and roster screens
+10. My Team screen
+11. Leagues, invites, standings by season total points, weekly scoreboard, weekly head-to-head (bragging rights only)
+12. Trending tab
+13. Catalyst Calendar
+14. Feed
+15. Day One share card
+16. TestFlight build for friends
 
 ## Start collecting data early
 Get the daily data job running as soon as step 4 is done, even before the app works. Every day it runs before launch is free history for tuning the scoring. (YouTube and Last.fm only give current numbers, so Growth history only exists from the day the job starts.)
@@ -67,8 +68,10 @@ Update this section at the end of every session with what's done and what's next
 - **2026-11-14, Step 1 done:** Expo SDK 58 app with Expo Router + TypeScript, home screen showing database connection status, `.env.example` template, Supabase CLI. Supabase project `bafhhlncbuqdhkpvsydw` connected (keys in `.env`). On public Wi-Fi, run `npm run tunnel` instead of `npm start` (ngrok tunnel, no Expo account needed).
 - **2026-11-14, Step 2 done:** schema applied to Supabase project `bafhhlncbuqdhkpvsydw` (`supabase/migrations/20261114000000_initial_schema.sql`: 15 tables, 2 views, access rules; 55 local checks passed; live project verified: 11 platforms, private tables refuse anonymous reads). `src/lib/database.types.ts` generated from the live database; regenerate with `npm run db:types` after every migration.
 - **Product decisions (2026-11-14):** talent is exclusive within a league; scouts can be in multiple leagues with separate rosters (Day One credit = earliest pick); weeks run Monday to Sunday Pacific, finalized Sunday night.
-- **Schema notes:** `platforms.is_tracked` separates stat sources from link-only platforms (Spotify, Apple Music, Instagram, TikTok, X, SoundCloud, Kick). `talent_rankings` view powers Trending. `league_posts` holds weekly recaps, announcements, and messages. Scouts cannot insert picks directly: drafting must go through server code (step 8) that sets size_at_draft and multiplier via `src/lib/scoring`. The 2 add/drops per week limit is also enforced there, not in the database.
+- **Schema notes:** `platforms.is_tracked` separates stat sources from link-only platforms (Spotify, Apple Music, Instagram, TikTok, X, SoundCloud, Kick). `talent_rankings` view powers Trending. `league_posts` holds weekly recaps, announcements, and messages. Scouts cannot insert picks directly: drafting must go through server code (step 9) that sets size_at_draft and multiplier via `src/lib/scoring`. The 2 add/drops per week limit is also enforced there, not in the database.
 - **Product decisions from planning session (2026-11-14), docs only, no code changed yet:** scoring north star and review log; standings by season total points (weekly head-to-head is bragging rights only, playoffs removed); Catalyst Calendar added as v1 feature; backtest added as step 6; start the data job early.
 - **Schema follow-ups these decisions need (not built, propose before doing):** an events table for the Catalyst Calendar; `seasons.playoff_weeks` and `matchups.is_playoff` are no longer needed; `matchups.winner_scout_id` is now display only.
-- **2026-11-14, Step 3 in progress:** `supabase/seed/talent.json` has Faraz's 40 talent (18 musicians, 17 creators, 5 streamers; 36 draftable, 4 nominated pending identity or data source). `npm run seed:check` validates and checks links (all pass); `npm run seed` uploads once SUPABASE_SERVICE_ROLE_KEY is in `.env`. 26 have Wikipedia pages, short of the 30 wanted for the backtest.
+- **Eligibility rule (2026-11-14):** draftable only if their biggest platform is tracked (PRD 4). In `talent.json` the primary account = biggest platform; the seed script refuses a draftable talent whose primary is untracked. `provisional: true` = draftable pending the spike test. Bench = `status: nominated` + `hold_reason`. Notes and hold reasons live only in the seed file for now; add a `status_reason` column with the profile screens (step 8).
+- **Talent list balance, flag for the next talent pass:** need many more talent under 1M (2x and 3x multipliers; nobody yet is in the 1k to 10k 3x tier) and keep at least 10 draftable streamers. 8 of the 10 streamers are Twitch-first, so their sizes are unconfirmed until Twitch is connected in step 4.
+- **2026-11-14, Step 3 (superseded):** `supabase/seed/talent.json` has Faraz's 40 talent (18 musicians, 17 creators, 5 streamers; 36 draftable, 4 nominated pending identity or data source). `npm run seed:check` validates and checks links (all pass); `npm run seed` uploads once SUPABASE_SERVICE_ROLE_KEY is in `.env`. 26 have Wikipedia pages, short of the 30 wanted for the backtest.
 - **Next:** Step 3, seed 30 to 50 talent. For the backtest, at least 30 of them need a Wikipedia page, spread across positions. Smaller talent without one can come in later through nominations.

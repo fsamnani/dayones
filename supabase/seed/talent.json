@@ -84,24 +84,6 @@
     ]
   },
   {
-    "name": "ARES",
-    "slug": "ares",
-    "position": "musician",
-    "tags": [
-      "electronic"
-    ],
-    "status": "nominated",
-    "note": "Identity unconfirmed. Known for \"One Punch\". Need a link to the right artist.",
-    "accounts": [
-      {
-        "platform": "lastfm",
-        "external_id": "ARES",
-        "url": "https://www.last.fm/music/ARES",
-        "primary": true
-      }
-    ]
-  },
-  {
     "name": "NOTD",
     "slug": "notd",
     "position": "musician",
@@ -461,6 +443,35 @@
     ]
   },
   {
+    "name": "Aries",
+    "slug": "aries",
+    "position": "musician",
+    "tags": [
+      "alternative",
+      "hip-hop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCjSvjbknHwGbU1Kx0PC5zRg",
+        "url": "https://www.youtube.com/@aries",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Aries",
+        "url": "https://www.last.fm/music/Aries"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Aries (musician)",
+        "url": "https://en.wikipedia.org/wiki/Aries_(musician)"
+      }
+    ],
+    "note": "Confirmed by Faraz. Last.fm name \"Aries\" may be shared with other artists; check in step 4."
+  },
+  {
     "name": "Zubi",
     "slug": "zubi",
     "position": "musician",
@@ -468,8 +479,7 @@
       "soul",
       "afro-fusion"
     ],
-    "status": "nominated",
-    "note": "Identity unconfirmed. Best guess: Zubi (@zubisoul, \"Sugar\" with Anatu). Confirm before making draftable.",
+    "status": "draftable",
     "accounts": [
       {
         "platform": "youtube",
@@ -482,33 +492,140 @@
         "external_id": "Zubi",
         "url": "https://www.last.fm/music/Zubi"
       }
-    ]
+    ],
+    "note": "Confirmed by Faraz (@zubisoul). No Wikipedia page."
   },
   {
-    "name": "Logan Paul",
-    "slug": "logan-paul",
-    "position": "creator",
+    "name": "Ravyn Lenae",
+    "slug": "ravyn-lenae",
+    "position": "musician",
     "tags": [
-      "podcast",
-      "entertainment"
+      "r&b"
     ],
     "status": "draftable",
-    "note": "Impaulsive channel is the tracked account.",
     "accounts": [
       {
         "platform": "youtube",
-        "external_id": "UCGeBogGDZ9W3dsGx-mWQGJA",
-        "url": "https://www.youtube.com/@impaulsive",
+        "external_id": "UCtgNg5yxCyfjEE7Q7KeSmBw",
+        "url": "https://www.youtube.com/@ravynlenae",
         "primary": true
       },
       {
-        "platform": "wikipedia",
-        "external_id": "Logan Paul",
-        "url": "https://en.wikipedia.org/wiki/Logan_Paul"
+        "platform": "lastfm",
+        "external_id": "Ravyn Lenae",
+        "url": "https://www.last.fm/music/Ravyn+Lenae"
       },
       {
-        "platform": "spotify",
-        "url": "https://open.spotify.com/show/5ElxFLtshbPnXkgKmlSZJA"
+        "platform": "wikipedia",
+        "external_id": "Ravyn Lenae",
+        "url": "https://en.wikipedia.org/wiki/Ravyn_Lenae"
+      }
+    ]
+  },
+  {
+    "name": "2hollis",
+    "slug": "2hollis",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "electronic"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCFSjUwWd_1ro9p9ZlTr7Z4A",
+        "url": "https://www.youtube.com/@2hollis",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "2hollis",
+        "url": "https://www.last.fm/music/2hollis"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "2hollis",
+        "url": "https://en.wikipedia.org/wiki/2hollis"
+      }
+    ]
+  },
+  {
+    "name": "Nettspend",
+    "slug": "nettspend",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "underground"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC6CvS47L6uTuPSPhinE5jKA",
+        "url": "https://www.youtube.com/@nettspend",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Nettspend",
+        "url": "https://www.last.fm/music/Nettspend"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Nettspend",
+        "url": "https://en.wikipedia.org/wiki/Nettspend"
+      }
+    ]
+  },
+  {
+    "name": "EsDeeKid",
+    "slug": "esdeekid",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "uk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC8jLPGsRRCTaK-PAWIfCrpg",
+        "url": "https://www.youtube.com/@esdeekid",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "EsDeeKid",
+        "url": "https://www.last.fm/music/EsDeeKid"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "EsDeeKid",
+        "url": "https://en.wikipedia.org/wiki/EsDeeKid"
+      }
+    ]
+  },
+  {
+    "name": "Chezile",
+    "slug": "chezile",
+    "position": "musician",
+    "tags": [
+      "folk",
+      "singer-songwriter"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCSN1c_ss2mF-xMvaw8UJwjw",
+        "url": "https://www.youtube.com/@chezile",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Chezile",
+        "url": "https://www.last.fm/music/Chezile"
       }
     ]
   },
@@ -532,73 +649,6 @@
         "platform": "wikipedia",
         "external_id": "MrBeast",
         "url": "https://en.wikipedia.org/wiki/MrBeast"
-      }
-    ]
-  },
-  {
-    "name": "Hellahansel",
-    "slug": "hellahansel",
-    "position": "creator",
-    "tags": [
-      "food",
-      "san francisco",
-      "small business"
-    ],
-    "status": "draftable",
-    "note": "YouTube is 74k; main audience likely on TikTok/Instagram (link-only).",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UCAiRp-RFmOSJtePKZZ8efrQ",
-        "url": "https://www.youtube.com/@hellahanselspov",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "Dave Portnoy",
-    "slug": "dave-portnoy",
-    "position": "creator",
-    "tags": [
-      "food",
-      "pizza reviews"
-    ],
-    "status": "draftable",
-    "note": "One Bite Pizza Reviews channel is the tracked account.",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UC5PrkGgI_cIaSStOyRmLAKA",
-        "url": "https://www.youtube.com/@onebitepizzareviews",
-        "primary": true
-      },
-      {
-        "platform": "wikipedia",
-        "external_id": "Dave Portnoy",
-        "url": "https://en.wikipedia.org/wiki/Dave_Portnoy"
-      }
-    ]
-  },
-  {
-    "name": "Theo Von",
-    "slug": "theo-von",
-    "position": "creator",
-    "tags": [
-      "comedy",
-      "podcast"
-    ],
-    "status": "draftable",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UC5AQEUAwCh1sGDvkQtkDWUQ",
-        "url": "https://www.youtube.com/@theovon",
-        "primary": true
-      },
-      {
-        "platform": "wikipedia",
-        "external_id": "Theo Von",
-        "url": "https://en.wikipedia.org/wiki/Theo_Von"
       }
     ]
   },
@@ -636,7 +686,6 @@
       "finance"
     ],
     "status": "draftable",
-    "note": "Wikipedia page is recent, so little pageview history for the backtest.",
     "accounts": [
       {
         "platform": "youtube",
@@ -648,24 +697,6 @@
         "platform": "wikipedia",
         "external_id": "All-In Podcast",
         "url": "https://en.wikipedia.org/wiki/All-In_Podcast"
-      }
-    ]
-  },
-  {
-    "name": "GREG",
-    "slug": "greg",
-    "position": "creator",
-    "tags": [
-      "comedy",
-      "x"
-    ],
-    "status": "nominated",
-    "note": "X-only. No trackable Growth or Heat source, so cannot be drafted until one exists.",
-    "accounts": [
-      {
-        "platform": "x",
-        "url": "https://x.com/greg16676935420",
-        "primary": true
       }
     ]
   },
@@ -689,150 +720,6 @@
     ]
   },
   {
-    "name": "Festus Ezeli",
-    "slug": "festus-ezeli",
-    "position": "creator",
-    "tags": [
-      "food",
-      "san francisco",
-      "sports"
-    ],
-    "status": "draftable",
-    "note": "YouTube is only 3k; Wikipedia page is about his NBA career.",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UC5W5G483FaDqzJG1pejKnVw",
-        "url": "https://www.youtube.com/@festusezelitv",
-        "primary": true
-      },
-      {
-        "platform": "wikipedia",
-        "external_id": "Festus Ezeli",
-        "url": "https://en.wikipedia.org/wiki/Festus_Ezeli"
-      }
-    ]
-  },
-  {
-    "name": "The Real Tarzann",
-    "slug": "the-real-tarzann",
-    "position": "creator",
-    "tags": [
-      "wildlife",
-      "animals",
-      "adventure"
-    ],
-    "status": "draftable",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UCvJNQtApqga0jkpW0G1bYHQ",
-        "url": "https://www.youtube.com/@therealtarzann",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "BigJohnGolfs",
-    "slug": "bigjohngolfs",
-    "position": "creator",
-    "tags": [
-      "fitness",
-      "running",
-      "lifestyle"
-    ],
-    "status": "draftable",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UC8R8tgmzsXNJIsPtffDV9qQ",
-        "url": "https://www.youtube.com/@bigjohngolfs",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "Santa Cruz Medicinals",
-    "slug": "santa-cruz-medicinals",
-    "position": "creator",
-    "tags": [
-      "health",
-      "wellness"
-    ],
-    "status": "draftable",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UC2gG-jfnsdWGvXO_tFyyg6A",
-        "url": "https://www.youtube.com/@santacruzmedicinalss",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "MalloryBros",
-    "slug": "mallorybros",
-    "position": "creator",
-    "tags": [
-      "entertainment",
-      "commentary",
-      "podcast"
-    ],
-    "status": "draftable",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UCtR4ePwI68dyU4vffkQMscQ",
-        "url": "https://www.youtube.com/@mallorybros",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "Anthony Pompliano",
-    "slug": "anthony-pompliano",
-    "position": "creator",
-    "tags": [
-      "finance",
-      "bitcoin",
-      "tech"
-    ],
-    "status": "draftable",
-    "note": "No Wikipedia page found under this name.",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UCevXpeL8cNyAnww-NqJ4m2w",
-        "url": "https://www.youtube.com/@anthonypompliano",
-        "primary": true
-      }
-    ]
-  },
-  {
-    "name": "Iron Chef Dad",
-    "slug": "iron-chef-dad",
-    "position": "creator",
-    "tags": [
-      "food",
-      "cooking"
-    ],
-    "status": "draftable",
-    "note": "Family channel of chef Susur Lee; his Wikipedia page is the Heat signal.",
-    "accounts": [
-      {
-        "platform": "youtube",
-        "external_id": "UCQVwn0HNVFhg52-8ln0WJSw",
-        "url": "https://www.youtube.com/@ironchefdad",
-        "primary": true
-      },
-      {
-        "platform": "wikipedia",
-        "external_id": "Susur Lee",
-        "url": "https://en.wikipedia.org/wiki/Susur_Lee"
-      }
-    ]
-  },
-  {
     "name": "Corbin Brown",
     "slug": "corbin-brown",
     "position": "creator",
@@ -852,6 +739,755 @@
     ]
   },
   {
+    "name": "Logan Paul",
+    "slug": "logan-paul",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "entertainment"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCGeBogGDZ9W3dsGx-mWQGJA",
+        "url": "https://www.youtube.com/@impaulsive",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Logan Paul",
+        "url": "https://en.wikipedia.org/wiki/Logan_Paul"
+      },
+      {
+        "platform": "spotify",
+        "url": "https://open.spotify.com/show/5ElxFLtshbPnXkgKmlSZJA"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Dave Portnoy",
+    "slug": "dave-portnoy",
+    "position": "creator",
+    "tags": [
+      "food",
+      "pizza reviews"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5PrkGgI_cIaSStOyRmLAKA",
+        "url": "https://www.youtube.com/@onebitepizzareviews",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Dave Portnoy",
+        "url": "https://en.wikipedia.org/wiki/Dave_Portnoy"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Theo Von",
+    "slug": "theo-von",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5AQEUAwCh1sGDvkQtkDWUQ",
+        "url": "https://www.youtube.com/@theovon",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Theo Von",
+        "url": "https://en.wikipedia.org/wiki/Theo_Von"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Santa Cruz Medicinals",
+    "slug": "santa-cruz-medicinals",
+    "position": "creator",
+    "tags": [
+      "health",
+      "wellness"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC2gG-jfnsdWGvXO_tFyyg6A",
+        "url": "https://www.youtube.com/@santacruzmedicinalss",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "MalloryBros",
+    "slug": "mallorybros",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "commentary",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCtR4ePwI68dyU4vffkQMscQ",
+        "url": "https://www.youtube.com/@mallorybros",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Anthony Pompliano",
+    "slug": "anthony-pompliano",
+    "position": "creator",
+    "tags": [
+      "finance",
+      "bitcoin",
+      "tech"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCevXpeL8cNyAnww-NqJ4m2w",
+        "url": "https://www.youtube.com/@anthonypompliano",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Iron Chef Dad",
+    "slug": "iron-chef-dad",
+    "position": "creator",
+    "tags": [
+      "food",
+      "cooking"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCQVwn0HNVFhg52-8ln0WJSw",
+        "url": "https://www.youtube.com/@ironchefdad",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Susur Lee",
+        "url": "https://en.wikipedia.org/wiki/Susur_Lee"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "BigJohnGolfs",
+    "slug": "bigjohngolfs",
+    "position": "creator",
+    "tags": [
+      "fitness",
+      "running",
+      "lifestyle"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC8R8tgmzsXNJIsPtffDV9qQ",
+        "url": "https://www.youtube.com/@bigjohngolfs",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "John Oliver",
+    "slug": "john-oliver",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "news",
+      "tv"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC3XTzVzaHQEd30rQbuvCtTQ",
+        "url": "https://www.youtube.com/@lastweektonight",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Last Week Tonight with John Oliver",
+        "url": "https://en.wikipedia.org/wiki/Last_Week_Tonight_with_John_Oliver"
+      }
+    ],
+    "note": "Tracked via the Last Week Tonight channel and show page."
+  },
+  {
+    "name": "Tucker Carlson",
+    "slug": "tucker-carlson",
+    "position": "creator",
+    "tags": [
+      "politics",
+      "commentary",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCGttrUON87gWfU6dMWm1fcA",
+        "url": "https://www.youtube.com/@tuckercarlson",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Tucker Carlson",
+        "url": "https://en.wikipedia.org/wiki/Tucker_Carlson"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Neil deGrasse Tyson",
+    "slug": "neil-degrasse-tyson",
+    "position": "creator",
+    "tags": [
+      "science",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCqoAEDirJPjEUFcF2FklnBA",
+        "url": "https://www.youtube.com/@startalk",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Neil deGrasse Tyson",
+        "url": "https://en.wikipedia.org/wiki/Neil_deGrasse_Tyson"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Tracked via the StarTalk channel."
+  },
+  {
+    "name": "Jordan Peterson",
+    "slug": "jordan-peterson",
+    "position": "creator",
+    "tags": [
+      "psychology",
+      "commentary",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCL_f53ZEJxp8TtlOkHwMV9Q",
+        "url": "https://www.youtube.com/@jordanbpeterson",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jordan Peterson",
+        "url": "https://en.wikipedia.org/wiki/Jordan_Peterson"
+      }
+    ]
+  },
+  {
+    "name": "Vsauce",
+    "slug": "vsauce",
+    "position": "creator",
+    "tags": [
+      "science",
+      "education"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
+        "url": "https://www.youtube.com/@vsauce",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Vsauce",
+        "url": "https://en.wikipedia.org/wiki/Vsauce"
+      }
+    ]
+  },
+  {
+    "name": "Flagrant",
+    "slug": "flagrant",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5PstSsGrRwj2o6asQpC4Rg",
+        "url": "https://www.youtube.com/@officialflagrant",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Andrew Schulz",
+        "url": "https://en.wikipedia.org/wiki/Andrew_Schulz"
+      }
+    ],
+    "note": "Andrew Schulz's podcast. Wikipedia page is Schulz's."
+  },
+  {
+    "name": "Mike Majlak",
+    "slug": "mike-majlak",
+    "position": "creator",
+    "tags": [
+      "vlog",
+      "lifestyle"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCMk0u-pViW-Ff4F9SAGcI4g",
+        "url": "https://www.youtube.com/@mikemajlakvlogs",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Mike Majlak",
+        "url": "https://en.wikipedia.org/wiki/Mike_Majlak"
+      }
+    ]
+  },
+  {
+    "name": "Jet Bent-Lee",
+    "slug": "jet-bent-lee",
+    "position": "creator",
+    "tags": [
+      "food",
+      "lifestyle",
+      "vlog"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCqiTqlZ3noxRwbEiAZoDufw",
+        "url": "https://www.youtube.com/@jetbentlee",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "Levi Bent-Lee",
+    "slug": "levi-bent-lee",
+    "position": "creator",
+    "tags": [
+      "lifestyle",
+      "vlog"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC7VP31FVLPlzBI-JMKz_G1g",
+        "url": "https://www.youtube.com/@levibentlee",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch."
+  },
+  {
+    "name": "CaseOh",
+    "slug": "caseoh",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "irl"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC63anZxfVGHUEmfBAf5w7pw",
+        "url": "https://www.youtube.com/@caseoh_",
+        "primary": true
+      },
+      {
+        "platform": "twitch",
+        "external_id": "caseoh_",
+        "url": "https://www.twitch.tv/caseoh_"
+      }
+    ]
+  },
+  {
+    "name": "Jynxzi",
+    "slug": "jynxzi",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "rainbow six"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCjiXtODGCCulmhwypZAWSag",
+        "url": "https://www.youtube.com/@jynxzi"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "jynxzi",
+        "url": "https://www.twitch.tv/jynxzi",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jynxzi",
+        "url": "https://en.wikipedia.org/wiki/Jynxzi"
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "Agent00",
+    "slug": "agent00",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "irl"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCh2aTKSbIyxpnOsbHsmV-ig",
+        "url": "https://www.youtube.com/@agent00"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "agent00",
+        "url": "https://www.twitch.tv/agent00",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Agent00",
+        "url": "https://en.wikipedia.org/wiki/Agent00"
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "ExtraEmily",
+    "slug": "extraemily",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "just chatting"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCN4PUx0xlsaGTNPxgQYPjKA",
+        "url": "https://www.youtube.com/@extraemily"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "extraemily",
+        "url": "https://www.twitch.tv/extraemily",
+        "primary": true
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "Zoe Spencer",
+    "slug": "zoe-spencer",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "just chatting"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCskL-Ip1cROVhWGiOBhHmYg",
+        "url": "https://www.youtube.com/@zoespencer"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "zoespencer",
+        "url": "https://www.twitch.tv/zoespencer",
+        "primary": true
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "Emiru",
+    "slug": "emiru",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "cosplay"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCZprw7Bxzfh2IysXNnl1S3g",
+        "url": "https://www.youtube.com/@emiru"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "emiru",
+        "url": "https://www.twitch.tv/emiru",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Emiru",
+        "url": "https://en.wikipedia.org/wiki/Emiru"
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "Ludwig",
+    "slug": "ludwig",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "events"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCrPseYLGpNygVi34QpGNqpA",
+        "url": "https://www.youtube.com/@ludwig",
+        "primary": true
+      },
+      {
+        "platform": "twitch",
+        "external_id": "ludwig",
+        "url": "https://www.twitch.tv/ludwig"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Ludwig Ahgren",
+        "url": "https://en.wikipedia.org/wiki/Ludwig_Ahgren"
+      }
+    ]
+  },
+  {
+    "name": "Atrioc",
+    "slug": "atrioc",
+    "position": "streamer",
+    "tags": [
+      "commentary",
+      "marketing"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCgv4dPk_qZNAbUW9WkuLPSA",
+        "url": "https://www.youtube.com/@atrioc"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "atrioc",
+        "url": "https://www.twitch.tv/atrioc",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Atrioc",
+        "url": "https://en.wikipedia.org/wiki/Atrioc"
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "BruceDropEmOff",
+    "slug": "brucedropemoff",
+    "position": "streamer",
+    "tags": [
+      "gaming",
+      "irl"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCUL_QMvC1QfgfHzsJHfLWPw",
+        "url": "https://www.youtube.com/@brucedropemoff"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "brucedropemoff",
+        "url": "https://www.twitch.tv/brucedropemoff",
+        "primary": true
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "PlaqueBoyMax",
+    "slug": "plaqueboymax",
+    "position": "streamer",
+    "tags": [
+      "music",
+      "irl"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCaSE0bK1P1twQzkPUkncjLQ",
+        "url": "https://www.youtube.com/@plaqueboymax"
+      },
+      {
+        "platform": "twitch",
+        "external_id": "plaqueboymax",
+        "url": "https://www.twitch.tv/plaqueboymax",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "PlaqueBoyMax",
+        "url": "https://en.wikipedia.org/wiki/PlaqueBoyMax"
+      }
+    ],
+    "note": "Main platform is Twitch; channel and size confirmed when Twitch is connected in step 4."
+  },
+  {
+    "name": "Festus Ezeli",
+    "slug": "festus-ezeli",
+    "position": "creator",
+    "tags": [
+      "food",
+      "san francisco",
+      "sports"
+    ],
+    "status": "nominated",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5W5G483FaDqzJG1pejKnVw",
+        "url": "https://www.youtube.com/@festusezelitv",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Festus Ezeli",
+        "url": "https://en.wikipedia.org/wiki/Festus_Ezeli"
+      }
+    ],
+    "hold_reason": "Main platform is Instagram/TikTok (YouTube only 3k)."
+  },
+  {
+    "name": "Hellahansel",
+    "slug": "hellahansel",
+    "position": "creator",
+    "tags": [
+      "food",
+      "san francisco",
+      "small business"
+    ],
+    "status": "nominated",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCAiRp-RFmOSJtePKZZ8efrQ",
+        "url": "https://www.youtube.com/@hellahanselspov",
+        "primary": true
+      }
+    ],
+    "hold_reason": "Main platform is Instagram/TikTok (YouTube only 74k)."
+  },
+  {
+    "name": "The Real Tarzann",
+    "slug": "the-real-tarzann",
+    "position": "creator",
+    "tags": [
+      "wildlife",
+      "animals",
+      "adventure"
+    ],
+    "status": "nominated",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCvJNQtApqga0jkpW0G1bYHQ",
+        "url": "https://www.youtube.com/@therealtarzann",
+        "primary": true
+      }
+    ],
+    "hold_reason": "Main platform is Instagram (YouTube 1.6M is secondary)."
+  },
+  {
+    "name": "GREG",
+    "slug": "greg",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "x"
+    ],
+    "status": "nominated",
+    "accounts": [
+      {
+        "platform": "x",
+        "url": "https://x.com/greg16676935420",
+        "primary": true
+      }
+    ],
+    "hold_reason": "X only. X is not a data source."
+  },
+  {
     "name": "N3on",
     "slug": "n3on",
     "position": "streamer",
@@ -860,14 +1496,12 @@
       "entertainment",
       "kick"
     ],
-    "status": "draftable",
-    "note": "Wikipedia page is recent (no 2025 pageviews yet).",
+    "status": "nominated",
     "accounts": [
       {
         "platform": "youtube",
         "external_id": "UCsiqlKIUDHZJVG4smMvhF4w",
-        "url": "https://www.youtube.com/@n3on",
-        "primary": true
+        "url": "https://www.youtube.com/@n3on"
       },
       {
         "platform": "wikipedia",
@@ -876,9 +1510,11 @@
       },
       {
         "platform": "kick",
-        "url": "https://kick.com/n3on"
+        "url": "https://kick.com/n3on",
+        "primary": true
       }
-    ]
+    ],
+    "hold_reason": "Main platform is Kick. Kick API has live viewers but no follower counts."
   },
   {
     "name": "Kanel Joseph",
@@ -889,19 +1525,20 @@
       "pranks",
       "entertainment"
     ],
-    "status": "draftable",
+    "status": "nominated",
     "accounts": [
       {
         "platform": "youtube",
         "external_id": "UCpn_ODet9knMmEj5DB0_KnQ",
-        "url": "https://www.youtube.com/@kaneljoseph",
-        "primary": true
+        "url": "https://www.youtube.com/@kaneljoseph"
       },
       {
         "platform": "kick",
-        "url": "https://kick.com/kaneljoseph"
+        "url": "https://kick.com/kaneljoseph",
+        "primary": true
       }
-    ]
+    ],
+    "hold_reason": "Main platform is Kick. Kick API has live viewers but no follower counts."
   },
   {
     "name": "Clavicular",
@@ -913,19 +1550,19 @@
       "kick"
     ],
     "status": "nominated",
-    "note": "No YouTube channel found, Kick is link-only, so no Growth signal yet. Wikipedia gives Heat only.",
     "accounts": [
       {
         "platform": "wikipedia",
         "external_id": "Clavicular (influencer)",
-        "url": "https://en.wikipedia.org/wiki/Clavicular_(influencer)",
-        "primary": true
+        "url": "https://en.wikipedia.org/wiki/Clavicular_(influencer)"
       },
       {
         "platform": "kick",
-        "url": "https://kick.com/clavicular"
+        "url": "https://kick.com/clavicular",
+        "primary": true
       }
-    ]
+    ],
+    "hold_reason": "Main platform is Kick. Kick API has live viewers but no follower counts."
   },
   {
     "name": "HexumLite",
@@ -936,20 +1573,20 @@
       "social experiments",
       "kick"
     ],
-    "status": "draftable",
-    "note": "YouTube channel match (@hexumlitee, 27k) is a best guess.",
+    "status": "nominated",
     "accounts": [
       {
         "platform": "youtube",
         "external_id": "UCgqnp7YjbMND9i9qLG3n1iw",
-        "url": "https://www.youtube.com/@hexumlitee",
-        "primary": true
+        "url": "https://www.youtube.com/@hexumlitee"
       },
       {
         "platform": "kick",
-        "url": "https://kick.com/hexumlite"
+        "url": "https://kick.com/hexumlite",
+        "primary": true
       }
-    ]
+    ],
+    "hold_reason": "Main platform is Kick. Kick API has live viewers but no follower counts."
   },
   {
     "name": "CityBoyJJ",
@@ -959,18 +1596,42 @@
       "irl",
       "kick"
     ],
-    "status": "draftable",
-    "note": "YouTube channel match (@thecityboyjj, 20k) is a best guess.",
+    "status": "nominated",
     "accounts": [
       {
         "platform": "youtube",
         "external_id": "UCsTKZUSjWKZuNpM-IPdJbyQ",
-        "url": "https://www.youtube.com/@thecityboyjj",
-        "primary": true
+        "url": "https://www.youtube.com/@thecityboyjj"
       },
       {
         "platform": "kick",
-        "url": "https://kick.com/cityboyjj"
+        "url": "https://kick.com/cityboyjj",
+        "primary": true
+      }
+    ],
+    "hold_reason": "Main platform is Kick/Instagram."
+  },
+  {
+    "name": "Arman Tsarukyan",
+    "slug": "arman-tsarukyan",
+    "position": "streamer",
+    "tags": [
+      "mma",
+      "ufc",
+      "kick"
+    ],
+    "status": "nominated",
+    "hold_reason": "Main platforms are Kick and Instagram. Position to confirm (fighter who streams).",
+    "accounts": [
+      {
+        "platform": "kick",
+        "url": "https://kick.com/armantsarukyan",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Arman Tsarukyan",
+        "url": "https://en.wikipedia.org/wiki/Arman_Tsarukyan"
       }
     ]
   }
