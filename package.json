@@ -33,7 +33,8 @@
     "@types/node": "^26.6.6",
     "@types/react": "~19.3.0",
     "supabase": "^3.1.0",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "vitest": "^4.1.12"
   },
   "scripts": {
     "start": "expo start",
@@ -47,7 +48,10 @@
     "seed": "node --env-file=.env scripts/seed-talent.mts",
     "seed:check": "node --env-file=.env scripts/seed-talent.mts --dry-run",
     "job": "node --env-file=.env scripts/run-job.mts",
-    "functions:deploy": "supabase functions deploy daily-stats --remote=bafhhlncbuqdhkpvsydw --use-api --no-verify-jwt"
+    "functions:deploy": "npm run scoring:sync && supabase functions deploy daily-stats --remote=bafhhlncbuqdhkpvsydw --use-api --no-verify-jwt",
+    "test": "vitest run",
+    "scoring:sync": "cp src/lib/scoring/index.ts supabase/functions/_shared/scoring.ts",
+    "score:check": "node --env-file=.env scripts/score-dry-run.mts"
   },
   "private": true
 }

@@ -53,3 +53,50 @@ export async function checkConnection(): Promise<ConnectionResult> {
     return { status: 'unreachable', talentCount: null };
   }
 }
+
+export type TopScore = {
+  name: string;
+  weekStart: string;
+  total: number;
+  growth: number;
+  heat: number;
+  milestones: number;
+  heatWinner: string | null;
+  heatRatio: number | null;
+  isFinal: boolean;
+};
+
+/** The highest-scoring talent of the most recent scored week. */
+export async function topScores(limit = 5): Promise<TopScore[]> {
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from('talent_weekly_scores')
+    .select('week_start, total_points, growth_points, heat_points, milestone_points, is_final, details, talent(name)')
+    .order('week_start', { ascending: false })
+    .order('total_points', { ascending: false })
+    .limit(limit);
+  const rows = (data ?? []) as unknown as {
+    week_start: string;
+    total_points: number;
+    growth_points: number;
+    heat_points: number;
+    milestone_points: number;
+    is_final: boolean;
+    details: { heat?: { winner: string | null; ratio: number | null } } | null;
+    talent: { name: string } | null;
+  }[];
+  const latest = rows[0]?.week_start;
+  return rows
+    .filter((r) => r.week_start === latest)
+    .map((r) => ({
+      name: r.talent?.name ?? 'Unknown',
+      weekStart: r.week_start,
+      total: Number(r.total_points),
+      growth: Number(r.growth_points),
+      heat: Number(r.heat_points),
+      milestones: Number(r.milestone_points),
+      heatWinner: r.details?.heat?.winner ?? null,
+      heatRatio: r.details?.heat?.ratio ?? null,
+      isFinal: r.is_final,
+    }));
+}

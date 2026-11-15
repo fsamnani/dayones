@@ -501,6 +501,62 @@ export type Database = {
         }
         Relationships: []
       }
+      scoring_platform_config: {
+        Row: {
+          audience_weight: number | null
+          heat_floor: number | null
+          heat_floor_unit: string | null
+          platform_id: string
+          position: Database["public"]["Enums"]["talent_position"]
+          updated_at: string
+        }
+        Insert: {
+          audience_weight?: number | null
+          heat_floor?: number | null
+          heat_floor_unit?: string | null
+          platform_id: string
+          position: Database["public"]["Enums"]["talent_position"]
+          updated_at?: string
+        }
+        Update: {
+          audience_weight?: number | null
+          heat_floor?: number | null
+          heat_floor_unit?: string | null
+          platform_id?: string
+          position?: Database["public"]["Enums"]["talent_position"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scoring_platform_config_platform_id_fkey"
+            columns: ["platform_id"]
+            isOneToOne: false
+            referencedRelation: "platforms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scoring_settings: {
+        Row: {
+          description: string
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          description: string
+          key: string
+          updated_at?: string
+          value: Json
+        }
+        Update: {
+          description?: string
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
       scout_weekly_points: {
         Row: {
           base_points: number

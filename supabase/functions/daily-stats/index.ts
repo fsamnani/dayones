@@ -5,6 +5,8 @@
  *                        plus yesterday's live-viewer roll-up for streamers
  *   ?task=live           every 20 minutes: who is live on Twitch and with how many viewers
  *   ?task=wiki-backfill  once: the last 12 months of Wikipedia pageviews (for the backtest)
+ *   ?task=score          recompute weekly scores (also runs at the end of every daily run).
+ *                        Optional &week=YYYY-MM-DD (a Monday) and &force=1 to redo a final week
  *
  * Called by pg_cron (see migration 20261115000000) with "Authorization: Bearer <CRON_SECRET>".
  * Runs as the service role: it is the only thing allowed to write stats.
@@ -26,12 +28,13 @@ import {
   youtubeChannelStats,
   youtubeRecentUploads,
 } from './collectors.ts';
+import { runScoring } from './scoring-run.ts';
 
 const env = (name: string) => Deno.env.get(name) ?? '';
 
 const db = createClient(env('SUPABASE_URL'), env('SUPABASE_SERVICE_ROLE_KEY'), { auth: { persistSession: false } });
 
-type Run = { id: number; errors: string[]; snapshots: number; talent: Set<string> };
+type Run = { id: number; errors: string[]; snapshots: number; talent: Set<string>; notes?: string };
 
 Deno.serve(async (req) => {
   const auth = req.headers.get('authorization') ?? '';
@@ -39,15 +42,19 @@ Deno.serve(async (req) => {
   if (!secret || auth !== `Bearer ${secret}`) return new Response('Unauthorized', { status: 401 });
 
   const task = new URL(req.url).searchParams.get('task') ?? 'daily';
-  if (!['daily', 'live', 'wiki-backfill'].includes(task)) return new Response(`Unknown task ${task}`, { status: 400 });
+  if (!['daily', 'live', 'wiki-backfill', 'score'].includes(task)) return new Response(`Unknown task ${task}`, { status: 400 });
 
   const { data: started, error: startError } = await db.from('job_runs').insert({ task }).select('id').single();
   if (startError) return new Response(startError.message, { status: 500 });
   const run: Run = { id: started.id, errors: [], snapshots: 0, talent: new Set() };
 
   try {
-    if (task === 'daily') await runDaily(run);
-    else if (task === 'live') await runLive(run);
+    const params = new URL(req.url).searchParams;
+    if (task === 'daily') {
+      await runDaily(run);
+      await score(run, {});
+    } else if (task === 'live') await runLive(run);
+    else if (task === 'score') await score(run, { week: params.get('week') ?? undefined, force: params.get('force') === '1' });
     else await runWikiBackfill(run);
   } catch (e) {
     run.errors.push(`fatal: ${String(e)}`);
@@ -56,13 +63,24 @@ Deno.serve(async (req) => {
   const status = run.errors.some((e) => e.startsWith('fatal')) ? 'error' : run.errors.length ? 'partial' : 'ok';
   await db
     .from('job_runs')
-    .update({ finished_at: new Date().toISOString(), status, talent_updated: run.talent.size, snapshots_written: run.snapshots, errors: run.errors })
+    .update({ finished_at: new Date().toISOString(), status, talent_updated: run.talent.size, snapshots_written: run.snapshots, errors: run.errors, notes: run.notes ?? null })
     .eq('id', run.id);
 
-  return Response.json({ run: run.id, task, status, talent_updated: run.talent.size, snapshots_written: run.snapshots, errors: run.errors });
+  return Response.json({ run: run.id, task, status, talent_updated: run.talent.size, snapshots_written: run.snapshots, errors: run.errors, notes: run.notes ?? null });
 });
 
 // ---------------------------------------------------------------------------
+
+/** Weekly scores for last week and this week so far. Formulas live in _shared/scoring.ts. */
+async function score(run: Run, opts: { week?: string; force?: boolean }) {
+  try {
+    const out = await runScoring(db, { weeks: opts.week ? [opts.week] : undefined, force: opts.force, write: true });
+    run.notes = `scored ${out.scored.length} talent-weeks for ${out.weeks.join(', ')}; ${out.milestonesLogged} milestones; ${out.pickRows} pick rows`;
+    if (run.talent.size === 0) for (const r of out.scored) run.talent.add(r.talent_id);
+  } catch (e) {
+    run.errors.push(`scoring: ${String(e)}`);
+  }
+}
 
 async function trackedAccounts(platform?: string): Promise<Account[]> {
   let q = db
