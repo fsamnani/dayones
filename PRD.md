@@ -158,7 +158,7 @@ Before anyone plays, test the scoring formula against history.
 
 ### 10a. Spike test: Instagram and TikTok data (before launch)
 Many talent are biggest on Instagram or TikTok. Before launch, test a paid source:
-- Run an Apify Social Blade actor against 10 talent we know well (start with the provisional talent).
+- Run an Apify Social Blade actor against the provisional talent (11 as of Nov 14, 2026; decided by Faraz). Faraz spot-checks a few follower counts on his phone, one time, to judge accuracy.
 - Report: do the Instagram and TikTok follower numbers match reality, how fresh is the data, how far back does daily history go, and what would it cost per month for 200 talent updated daily.
 - Budget: under $20 for the test. Findings only; do not wire it into the app.
 - Outcome decides whether Instagram/TikTok become tracked platforms, which would move many bench talent to draftable, and confirms or rejects the provisional talent.
