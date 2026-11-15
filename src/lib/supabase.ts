@@ -25,8 +25,10 @@ export type ConnectionResult = { status: ConnectionStatus; talentCount: number |
 export async function checkConnection(): Promise<ConnectionResult> {
   if (!supabase) return { status: 'missing-keys', talentCount: null };
   try {
-    const { count, error } = await supabase.from('talent').select('*', { count: 'exact', head: true });
-    if (!error) return { status: 'connected', talentCount: count ?? 0 };
+    // A real read (not a HEAD request): HEAD hides "table not found" errors.
+    const { count, error } = await supabase.from('talent').select('id', { count: 'exact' }).limit(1);
+    if (!error && count !== null) return { status: 'connected', talentCount: count };
+    if (!error) return { status: 'no-tables', talentCount: null };
     if (error.code === 'PGRST205' || error.code === '42P01') return { status: 'no-tables', talentCount: null };
     if (/jwt|api key|apikey|unauthorized|invalid/i.test(error.message)) return { status: 'bad-key', talentCount: null };
     return { status: 'unreachable', talentCount: null };
