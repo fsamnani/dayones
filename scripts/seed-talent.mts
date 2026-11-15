@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /**
  * Uploads supabase/seed/talent.json into the database.
  *
@@ -10,7 +11,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'node:fs';
 
-import type { Database } from '../src/lib/database.types.ts';
+import type { Database } from '../src/lib/database.types';
 
 type Position = Database['public']['Enums']['talent_position'];
 type Status = Database['public']['Enums']['talent_status'];
