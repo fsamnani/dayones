@@ -41,8 +41,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "tunnel": "expo start --tunnel ngrok",
-    "db:push": "supabase db push --remote",
-    "db:types": "supabase gen types --lang=typescript --remote > src/lib/database.types.ts"
+    "db:push": "supabase db push --remote=bafhhlncbuqdhkpvsydw",
+    "db:types": "supabase gen types --lang=typescript --remote=bafhhlncbuqdhkpvsydw > src/lib/database.types.ts"
   },
   "private": true
 }

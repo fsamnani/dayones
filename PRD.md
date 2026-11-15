@@ -165,11 +165,13 @@ Run one 12-week season with 4 to 5 friends.
 - Do people share Day One cards?
 
 ## 12. Open questions
-- Exact Audience Index weights per position
-- Kick and Twitch API access
-- Name of the in-app currency for points, if any
-- Admin tooling for curating talent and milestones
-- Existing fantasy-music or creator-prediction apps: research before launch
+- Exact Audience Index weights per position (to be settled by the backtest and the first season's scoring review log)
+- Kick and Twitch API access (verify in step 4)
 - Catalyst Calendar: which event sources can be pulled for free, beyond admin entry
-- Playoffs: removed for now, since standings are decided by season total points. Revisit if friends want a finale
-- Backtest sample: smaller talent often have no Wikipedia page, so the Heat backtest leans toward talent who are already notable
+- Existing fantasy-music or creator-prediction apps: research before launch
+
+## 13. Decided
+- **Playoffs:** removed. Standings are by season total points. Revisit only if friends ask for a finale.
+- **Backtest sample:** will lean toward talent with a Wikipedia page, which means already-notable talent. Accepted for now. Smaller talent come in later through nominations.
+- **Points currency:** plain "points" in v1. No separate in-app currency name.
+- **Admin tooling:** none in v1. Faraz curates talent and milestones through the Supabase dashboard and seed files; an in-app admin screen is v2.
