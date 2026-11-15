@@ -41,7 +41,7 @@ Faraz and 4 to 5 friends in SF who follow music, YouTube, and streamers, already
 **Rules**
 - Each talent has one primary position. Flex absorbs anyone.
 - **Draftable only if the platform where they have the most audience is one we track.** A creator with 3k YouTube subs but millions on Instagram is not draftable, because their score would not reflect reality. They are marked **nominated, untrackable** and kept on the bench until a data source exists for their main platform.
-  - For musicians, Last.fm stands in for their streaming audience (Spotify, Apple Music), since streaming is where a musician's audience lives. Their Instagram following does not disqualify them. *(Interpretation, pending Faraz's confirmation.)*
+  - For musicians, Last.fm stands in for their streaming audience (Spotify, Apple Music), since streaming is where a musician's audience lives. Their Instagram following does not disqualify them. *(Confirmed by Faraz, Nov 14, 2026.)*
   - Talent we are not sure about are draftable but **provisional** until the Instagram/TikTok spike test (section 10a) confirms their main platform.
   - They must also have at least one Growth signal and one Heat signal we can track.
 - **The bench:** nominated talent we cannot score yet, each with the reason (for example "main platform is Kick"). When a data source for their platform comes online, they move to draftable.
