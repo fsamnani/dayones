@@ -1,0 +1,977 @@
+[
+  {
+    "name": "Drake",
+    "slug": "drake",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "hip-hop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCByOQJjav0CUDwxCk-jVNRQ",
+        "url": "https://www.youtube.com/@drakeofficial",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Drake",
+        "url": "https://www.last.fm/music/Drake"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Drake (musician)",
+        "url": "https://en.wikipedia.org/wiki/Drake_(musician)"
+      }
+    ]
+  },
+  {
+    "name": "Lil Baby",
+    "slug": "lil-baby",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "hip-hop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCVS88tG_NYgxF6Udnx2815Q",
+        "url": "https://www.youtube.com/@lilbabyatl",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Lil Baby",
+        "url": "https://www.last.fm/music/Lil+Baby"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Lil Baby",
+        "url": "https://en.wikipedia.org/wiki/Lil_Baby"
+      }
+    ]
+  },
+  {
+    "name": "Steve Lacy",
+    "slug": "steve-lacy",
+    "position": "musician",
+    "tags": [
+      "r&b",
+      "alternative"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCRt1A0W4iZfvsOhAH1yft2Q",
+        "url": "https://www.youtube.com/@stevelacy119",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Steve Lacy",
+        "url": "https://www.last.fm/music/Steve+Lacy"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Steve Lacy",
+        "url": "https://en.wikipedia.org/wiki/Steve_Lacy"
+      }
+    ]
+  },
+  {
+    "name": "ARES",
+    "slug": "ares",
+    "position": "musician",
+    "tags": [
+      "electronic"
+    ],
+    "status": "nominated",
+    "note": "Identity unconfirmed. Known for \"One Punch\". Need a link to the right artist.",
+    "accounts": [
+      {
+        "platform": "lastfm",
+        "external_id": "ARES",
+        "url": "https://www.last.fm/music/ARES",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "NOTD",
+    "slug": "notd",
+    "position": "musician",
+    "tags": [
+      "electronic",
+      "pop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCwdaVj48h-_zNt2NlahIqzw",
+        "url": "https://www.youtube.com/@notd",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "NOTD",
+        "url": "https://www.last.fm/music/NOTD"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "NOTD",
+        "url": "https://en.wikipedia.org/wiki/NOTD"
+      }
+    ]
+  },
+  {
+    "name": "Morgan Wallen",
+    "slug": "morgan-wallen",
+    "position": "musician",
+    "tags": [
+      "country"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCzIyoPv6j1MAZpDHKLGP_eA",
+        "url": "https://www.youtube.com/@morganwallen",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Morgan Wallen",
+        "url": "https://www.last.fm/music/Morgan+Wallen"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Morgan Wallen",
+        "url": "https://en.wikipedia.org/wiki/Morgan_Wallen"
+      }
+    ]
+  },
+  {
+    "name": "Ella Langley",
+    "slug": "ella-langley",
+    "position": "musician",
+    "tags": [
+      "country"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCo80hok0dbQapOH6dJl9Hqw",
+        "url": "https://www.youtube.com/@ellalangleymusic",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Ella Langley",
+        "url": "https://www.last.fm/music/Ella+Langley"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Ella Langley",
+        "url": "https://en.wikipedia.org/wiki/Ella_Langley"
+      }
+    ]
+  },
+  {
+    "name": "Karol G",
+    "slug": "karol-g",
+    "position": "musician",
+    "tags": [
+      "latin",
+      "reggaeton"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCZuPJZ2kGFdlbQu1qotZaHw",
+        "url": "https://www.youtube.com/@karolg",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Karol G",
+        "url": "https://www.last.fm/music/Karol+G"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Karol G",
+        "url": "https://en.wikipedia.org/wiki/Karol_G"
+      }
+    ]
+  },
+  {
+    "name": "J Balvin",
+    "slug": "j-balvin",
+    "position": "musician",
+    "tags": [
+      "latin",
+      "reggaeton"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCt-k6JwNWHMXDBGm9IYHdsg",
+        "url": "https://www.youtube.com/@jbalvin",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "J Balvin",
+        "url": "https://www.last.fm/music/J+Balvin"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "J Balvin",
+        "url": "https://en.wikipedia.org/wiki/J_Balvin"
+      }
+    ]
+  },
+  {
+    "name": "Bad Bunny",
+    "slug": "bad-bunny",
+    "position": "musician",
+    "tags": [
+      "latin",
+      "reggaeton"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCmBA_wu8xGg1OfOkfW13Q0Q",
+        "url": "https://www.youtube.com/@badbunnypr",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Bad Bunny",
+        "url": "https://www.last.fm/music/Bad+Bunny"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Bad Bunny",
+        "url": "https://en.wikipedia.org/wiki/Bad_Bunny"
+      }
+    ]
+  },
+  {
+    "name": "Burna Boy",
+    "slug": "burna-boy",
+    "position": "musician",
+    "tags": [
+      "afrobeats"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCEzDdNqNkT-7rSfSGSr1hWg",
+        "url": "https://www.youtube.com/@burnaboy",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Burna Boy",
+        "url": "https://www.last.fm/music/Burna+Boy"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Burna Boy",
+        "url": "https://en.wikipedia.org/wiki/Burna_Boy"
+      }
+    ]
+  },
+  {
+    "name": "Mariah Carey",
+    "slug": "mariah-carey",
+    "position": "musician",
+    "tags": [
+      "pop",
+      "r&b"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCurpiDXSkcUbgdMwHNZkrCg",
+        "url": "https://www.youtube.com/@mariahcarey",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Mariah Carey",
+        "url": "https://www.last.fm/music/Mariah+Carey"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Mariah Carey",
+        "url": "https://en.wikipedia.org/wiki/Mariah_Carey"
+      }
+    ]
+  },
+  {
+    "name": "Eric Clapton",
+    "slug": "eric-clapton",
+    "position": "musician",
+    "tags": [
+      "rock",
+      "blues"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCtCOFqqGGGunX71nfZgPQOQ",
+        "url": "https://www.youtube.com/@ericclapton",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Eric Clapton",
+        "url": "https://www.last.fm/music/Eric+Clapton"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Eric Clapton",
+        "url": "https://en.wikipedia.org/wiki/Eric_Clapton"
+      }
+    ]
+  },
+  {
+    "name": "Loe Shimmy",
+    "slug": "loe-shimmy",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "melodic hip-hop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCKNnh5bOfVa6xWeu9x7678Q",
+        "url": "https://www.youtube.com/@loeshimmy",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Loe Shimmy",
+        "url": "https://www.last.fm/music/Loe+Shimmy"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Loe Shimmy",
+        "url": "https://en.wikipedia.org/wiki/Loe_Shimmy"
+      }
+    ]
+  },
+  {
+    "name": "Don Toliver",
+    "slug": "don-toliver",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "melodic hip-hop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCgT01FILdWB9BsXBXKjpQ7A",
+        "url": "https://www.youtube.com/@dontoliver",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Don Toliver",
+        "url": "https://www.last.fm/music/Don+Toliver"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Don Toliver",
+        "url": "https://en.wikipedia.org/wiki/Don_Toliver"
+      }
+    ]
+  },
+  {
+    "name": "Ruger",
+    "slug": "ruger",
+    "position": "musician",
+    "tags": [
+      "afrobeats"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCQvERCDVBsHg0CcBaPihvJg",
+        "url": "https://www.youtube.com/@ruger_official",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Ruger",
+        "url": "https://www.last.fm/music/Ruger"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Ruger (musician)",
+        "url": "https://en.wikipedia.org/wiki/Ruger_(musician)"
+      }
+    ]
+  },
+  {
+    "name": "Omah Lay",
+    "slug": "omah-lay",
+    "position": "musician",
+    "tags": [
+      "afrobeats"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCSUVM9Ygr6AI5Eje5BnFhtw",
+        "url": "https://www.youtube.com/@omahlay",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Omah Lay",
+        "url": "https://www.last.fm/music/Omah+Lay"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Omah Lay",
+        "url": "https://en.wikipedia.org/wiki/Omah_Lay"
+      }
+    ]
+  },
+  {
+    "name": "Zubi",
+    "slug": "zubi",
+    "position": "musician",
+    "tags": [
+      "soul",
+      "afro-fusion"
+    ],
+    "status": "nominated",
+    "note": "Identity unconfirmed. Best guess: Zubi (@zubisoul, \"Sugar\" with Anatu). Confirm before making draftable.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC0S3Rc_6kdndvXHIL50OtTg",
+        "url": "https://www.youtube.com/@zubisoul",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Zubi",
+        "url": "https://www.last.fm/music/Zubi"
+      }
+    ]
+  },
+  {
+    "name": "Logan Paul",
+    "slug": "logan-paul",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "entertainment"
+    ],
+    "status": "draftable",
+    "note": "Impaulsive channel is the tracked account.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCGeBogGDZ9W3dsGx-mWQGJA",
+        "url": "https://www.youtube.com/@impaulsive",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Logan Paul",
+        "url": "https://en.wikipedia.org/wiki/Logan_Paul"
+      },
+      {
+        "platform": "spotify",
+        "url": "https://open.spotify.com/show/5ElxFLtshbPnXkgKmlSZJA"
+      }
+    ]
+  },
+  {
+    "name": "MrBeast",
+    "slug": "mrbeast",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "challenges"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+        "url": "https://www.youtube.com/@mrbeast",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "MrBeast",
+        "url": "https://en.wikipedia.org/wiki/MrBeast"
+      }
+    ]
+  },
+  {
+    "name": "Hellahansel",
+    "slug": "hellahansel",
+    "position": "creator",
+    "tags": [
+      "food",
+      "san francisco",
+      "small business"
+    ],
+    "status": "draftable",
+    "note": "YouTube is 74k; main audience likely on TikTok/Instagram (link-only).",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCAiRp-RFmOSJtePKZZ8efrQ",
+        "url": "https://www.youtube.com/@hellahanselspov",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Dave Portnoy",
+    "slug": "dave-portnoy",
+    "position": "creator",
+    "tags": [
+      "food",
+      "pizza reviews"
+    ],
+    "status": "draftable",
+    "note": "One Bite Pizza Reviews channel is the tracked account.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5PrkGgI_cIaSStOyRmLAKA",
+        "url": "https://www.youtube.com/@onebitepizzareviews",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Dave Portnoy",
+        "url": "https://en.wikipedia.org/wiki/Dave_Portnoy"
+      }
+    ]
+  },
+  {
+    "name": "Theo Von",
+    "slug": "theo-von",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5AQEUAwCh1sGDvkQtkDWUQ",
+        "url": "https://www.youtube.com/@theovon",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Theo Von",
+        "url": "https://en.wikipedia.org/wiki/Theo_Von"
+      }
+    ]
+  },
+  {
+    "name": "Joe Rogan",
+    "slug": "joe-rogan",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "commentary"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCzQUP1qoWDoEbmsQxvdjxgQ",
+        "url": "https://www.youtube.com/@joerogan",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "The Joe Rogan Experience",
+        "url": "https://en.wikipedia.org/wiki/The_Joe_Rogan_Experience"
+      }
+    ]
+  },
+  {
+    "name": "All-In Podcast",
+    "slug": "all-in-podcast",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "tech",
+      "business",
+      "finance"
+    ],
+    "status": "draftable",
+    "note": "Wikipedia page is recent, so little pageview history for the backtest.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCESLZhusAkFfsNsApnjF_Cg",
+        "url": "https://www.youtube.com/@allin",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "All-In Podcast",
+        "url": "https://en.wikipedia.org/wiki/All-In_Podcast"
+      }
+    ]
+  },
+  {
+    "name": "GREG",
+    "slug": "greg",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "x"
+    ],
+    "status": "nominated",
+    "note": "X-only. No trackable Growth or Heat source, so cannot be drafted until one exists.",
+    "accounts": [
+      {
+        "platform": "x",
+        "url": "https://x.com/greg16676935420",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Roommates Show",
+    "slug": "roommates-show",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "basketball",
+      "sports"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC1N15bwJCPFHjEsun1epfmw",
+        "url": "https://www.youtube.com/@roommates_show",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Festus Ezeli",
+    "slug": "festus-ezeli",
+    "position": "creator",
+    "tags": [
+      "food",
+      "san francisco",
+      "sports"
+    ],
+    "status": "draftable",
+    "note": "YouTube is only 3k; Wikipedia page is about his NBA career.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5W5G483FaDqzJG1pejKnVw",
+        "url": "https://www.youtube.com/@festusezelitv",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Festus Ezeli",
+        "url": "https://en.wikipedia.org/wiki/Festus_Ezeli"
+      }
+    ]
+  },
+  {
+    "name": "The Real Tarzann",
+    "slug": "the-real-tarzann",
+    "position": "creator",
+    "tags": [
+      "wildlife",
+      "animals",
+      "adventure"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCvJNQtApqga0jkpW0G1bYHQ",
+        "url": "https://www.youtube.com/@therealtarzann",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "BigJohnGolfs",
+    "slug": "bigjohngolfs",
+    "position": "creator",
+    "tags": [
+      "fitness",
+      "running",
+      "lifestyle"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC8R8tgmzsXNJIsPtffDV9qQ",
+        "url": "https://www.youtube.com/@bigjohngolfs",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Santa Cruz Medicinals",
+    "slug": "santa-cruz-medicinals",
+    "position": "creator",
+    "tags": [
+      "health",
+      "wellness"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC2gG-jfnsdWGvXO_tFyyg6A",
+        "url": "https://www.youtube.com/@santacruzmedicinalss",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "MalloryBros",
+    "slug": "mallorybros",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "commentary",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCtR4ePwI68dyU4vffkQMscQ",
+        "url": "https://www.youtube.com/@mallorybros",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Anthony Pompliano",
+    "slug": "anthony-pompliano",
+    "position": "creator",
+    "tags": [
+      "finance",
+      "bitcoin",
+      "tech"
+    ],
+    "status": "draftable",
+    "note": "No Wikipedia page found under this name.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCevXpeL8cNyAnww-NqJ4m2w",
+        "url": "https://www.youtube.com/@anthonypompliano",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Iron Chef Dad",
+    "slug": "iron-chef-dad",
+    "position": "creator",
+    "tags": [
+      "food",
+      "cooking"
+    ],
+    "status": "draftable",
+    "note": "Family channel of chef Susur Lee; his Wikipedia page is the Heat signal.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCQVwn0HNVFhg52-8ln0WJSw",
+        "url": "https://www.youtube.com/@ironchefdad",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Susur Lee",
+        "url": "https://en.wikipedia.org/wiki/Susur_Lee"
+      }
+    ]
+  },
+  {
+    "name": "Corbin Brown",
+    "slug": "corbin-brown",
+    "position": "creator",
+    "tags": [
+      "tech",
+      "ai",
+      "software"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCJFMlSxcvlZg5yZUYJT0Pug",
+        "url": "https://www.youtube.com/@corbin_brown",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "N3on",
+    "slug": "n3on",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "entertainment",
+      "kick"
+    ],
+    "status": "draftable",
+    "note": "Wikipedia page is recent (no 2025 pageviews yet).",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCsiqlKIUDHZJVG4smMvhF4w",
+        "url": "https://www.youtube.com/@n3on",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "N3on",
+        "url": "https://en.wikipedia.org/wiki/N3on"
+      },
+      {
+        "platform": "kick",
+        "url": "https://kick.com/n3on"
+      }
+    ]
+  },
+  {
+    "name": "Kanel Joseph",
+    "slug": "kanel-joseph",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "pranks",
+      "entertainment"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCpn_ODet9knMmEj5DB0_KnQ",
+        "url": "https://www.youtube.com/@kaneljoseph",
+        "primary": true
+      },
+      {
+        "platform": "kick",
+        "url": "https://kick.com/kaneljoseph"
+      }
+    ]
+  },
+  {
+    "name": "Clavicular",
+    "slug": "clavicular",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "looksmaxxing",
+      "kick"
+    ],
+    "status": "nominated",
+    "note": "No YouTube channel found, Kick is link-only, so no Growth signal yet. Wikipedia gives Heat only.",
+    "accounts": [
+      {
+        "platform": "wikipedia",
+        "external_id": "Clavicular (influencer)",
+        "url": "https://en.wikipedia.org/wiki/Clavicular_(influencer)",
+        "primary": true
+      },
+      {
+        "platform": "kick",
+        "url": "https://kick.com/clavicular"
+      }
+    ]
+  },
+  {
+    "name": "HexumLite",
+    "slug": "hexumlite",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "social experiments",
+      "kick"
+    ],
+    "status": "draftable",
+    "note": "YouTube channel match (@hexumlitee, 27k) is a best guess.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCgqnp7YjbMND9i9qLG3n1iw",
+        "url": "https://www.youtube.com/@hexumlitee",
+        "primary": true
+      },
+      {
+        "platform": "kick",
+        "url": "https://kick.com/hexumlite"
+      }
+    ]
+  },
+  {
+    "name": "CityBoyJJ",
+    "slug": "cityboyjj",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "kick"
+    ],
+    "status": "draftable",
+    "note": "YouTube channel match (@thecityboyjj, 20k) is a best guess.",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCsTKZUSjWKZuNpM-IPdJbyQ",
+        "url": "https://www.youtube.com/@thecityboyjj",
+        "primary": true
+      },
+      {
+        "platform": "kick",
+        "url": "https://kick.com/cityboyjj"
+      }
+    ]
+  }
+]

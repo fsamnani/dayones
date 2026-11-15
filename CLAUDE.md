@@ -55,7 +55,8 @@ Scoring measures how much public attention a talent commands. If points disagree
 ## Project layout
 - `src/app/` screens (every file is a screen, Expo Router)
 - `src/lib/` shared code; `src/lib/supabase.ts` database connection; `src/lib/scoring/` scoring engine
-- `supabase/` database migrations and edge functions (data jobs)
+- `supabase/migrations/` database schema changes; `supabase/seed/talent.json` the talent list (source of truth, edit this to add or fix talent, then `npm run seed`)
+- `scripts/` one-off tools run on the Mac with `node --env-file=.env` (they may use the service_role key; the app never does)
 - `docs/scoring-review-log.md` weekly record of where the score missed reality
 - `AGENTS.md` Expo-specific coding rules (use `npx expo install`, check versioned Expo docs)
 - Supabase CLI is a project dev dependency: run it as `npx supabase ...`. Commands target a local database by default; `npm run db:push` and `npm run db:types` point at the real project by its ID, so no `supabase link` is needed
@@ -69,4 +70,5 @@ Update this section at the end of every session with what's done and what's next
 - **Schema notes:** `platforms.is_tracked` separates stat sources from link-only platforms (Spotify, Apple Music, Instagram, TikTok, X, SoundCloud, Kick). `talent_rankings` view powers Trending. `league_posts` holds weekly recaps, announcements, and messages. Scouts cannot insert picks directly: drafting must go through server code (step 8) that sets size_at_draft and multiplier via `src/lib/scoring`. The 2 add/drops per week limit is also enforced there, not in the database.
 - **Product decisions from planning session (2026-11-14), docs only, no code changed yet:** scoring north star and review log; standings by season total points (weekly head-to-head is bragging rights only, playoffs removed); Catalyst Calendar added as v1 feature; backtest added as step 6; start the data job early.
 - **Schema follow-ups these decisions need (not built, propose before doing):** an events table for the Catalyst Calendar; `seasons.playoff_weeks` and `matchups.is_playoff` are no longer needed; `matchups.winner_scout_id` is now display only.
+- **2026-11-14, Step 3 in progress:** `supabase/seed/talent.json` has Faraz's 40 talent (18 musicians, 17 creators, 5 streamers; 36 draftable, 4 nominated pending identity or data source). `npm run seed:check` validates and checks links (all pass); `npm run seed` uploads once SUPABASE_SERVICE_ROLE_KEY is in `.env`. 26 have Wikipedia pages, short of the 30 wanted for the backtest.
 - **Next:** Step 3, seed 30 to 50 talent. For the backtest, at least 30 of them need a Wikipedia page, spread across positions. Smaller talent without one can come in later through nominations.

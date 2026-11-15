@@ -42,7 +42,9 @@
     "lint": "expo lint",
     "tunnel": "expo start --tunnel ngrok",
     "db:push": "supabase db push --remote=bafhhlncbuqdhkpvsydw",
-    "db:types": "supabase gen types --lang=typescript --remote=bafhhlncbuqdhkpvsydw > src/lib/database.types.ts"
+    "db:types": "supabase gen types --lang=typescript --remote=bafhhlncbuqdhkpvsydw > src/lib/database.types.ts",
+    "seed": "node --env-file=.env scripts/seed-talent.mts",
+    "seed:check": "node --env-file=.env scripts/seed-talent.mts --dry-run"
   },
   "private": true
 }
