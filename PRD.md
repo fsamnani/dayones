@@ -1,6 +1,6 @@
 # DayOnes: Product Requirements (v1)
 
-Last updated: Nov 14, 2026
+Last updated: Nov 15, 2026
 Owner: Faraz
 
 ## 1. What DayOnes is
@@ -61,15 +61,20 @@ Talent are only ever compared on their own Growth and Heat, never on raw numbers
 Weekly points for each talent on your roster = **Growth points + Heat points + Milestone bonuses**, all multiplied by the **Day One multiplier** locked in when you drafted them.
 
 ### 5a. Growth points (slow, durable)
-- Each talent has an **Audience Index**: a weighted blend of their audience sizes across tracked platforms for their position.
+- Each talent has an **Audience Index** = the sum of (platform audience × platform weight) across all their tracked platforms. Audience = YouTube subscribers, Last.fm listeners, Twitch followers.
+- **Weights live in a config table**, one row per platform per position, all starting at 1.0, so they can be tuned after the backtest without a code change.
+- Mixing units across platforms is acceptable because Growth is a week-over-week ratio of this index: what matters is that the recipe stays stable from week to week.
+- **Known bias, flagged for backtest review:** Last.fm undercounts real music listening, so YouTube will dominate a musician's index.
 - Growth points = 100 x log10(Audience Index this week / Audience Index last week).
 - Plain English: every 10x in audience is worth 100 points, every 2x is worth about 30. Doubling counts the same whether it's 5k to 10k or 5M to 10M. The multiplier (5d) then rewards the smaller find.
 - Shrinking audiences give negative points.
 
 ### 5b. Heat points (fast, what everyone is talking about)
 Solves the "Theo Von has Trump on his podcast and everyone is clipping it" week, which subscriber counts alone would miss.
-- Signals: views on uploads in the last 7 days, Wikipedia pageviews, Reddit mentions, live viewers for streamers.
-- Each signal is compared to the talent's own trailing 8-week average, so a small creator's spike counts as much as a big one's.
+- Signals (v1): YouTube views on uploads in the last 7 days, Wikipedia pageviews, peak live viewers for streamers. Reddit mentions later.
+- Each signal is compared to the talent's own trailing 8-week average (its baseline), so a small creator's spike counts as much as a big one's.
+- **Strongest signal wins:** Heat uses the single highest ratio-to-baseline among the talent's eligible signals, not an average. We are trying to catch a spike on any one platform.
+- **Noise floor:** a signal is only eligible if its 8-week baseline is above a minimum absolute level, so tiny numbers cannot produce fake multiples. Minimums live in the same config table. Starting values: Wikipedia pageviews 100/day, YouTube recent-upload views 1,000/week, peak live viewers 50.
 - Heat points = 10 x log2(this week / their baseline), floored at 0, capped at 50 per week. Plain English: 2x normal attention = 10 points, 4x = 20, 8x = 30.
 
 ### 5c. Milestone bonuses (the touchdowns)
@@ -105,6 +110,9 @@ Before anyone plays, test the scoring formula against history.
 - Pull the last 12 months of daily Wikipedia pageviews for 30 talent across all positions. That API has years of history.
 - Run the Heat formula on it.
 - Check two things: how lumpy weekly scores are (how many near-zero weeks), and whether the biggest scoring weeks line up with real events like album drops or viral moments.
+- **Which signal wins the max, and how often?** If one signal wins most of the time, report it: the floors may be wrong or that signal too noisy.
+- **Double counting:** do fast-rising talent earn high Heat and high Growth for the same rise? Quantify the overlap so we can decide whether to adjust.
+- **Musician index balance:** how much of each musician's Audience Index comes from YouTube vs Last.fm (see 5a).
 - Write up the results, including a chart, so we can tune the formula before launch.
 
 **Limit:** YouTube and Last.fm only give current numbers, not history, so Growth cannot be backtested. We only build that history going forward, one day at a time, which is why the daily data job should start running as early as possible.
@@ -176,7 +184,7 @@ Run one 12-week season with 4 to 5 friends.
 - Do people share Day One cards?
 
 ## 12. Open questions
-- Exact Audience Index weights per position (to be settled by the backtest and the first season's scoring review log)
+- Audience Index weights and Heat floors: start values set (5a, 5b); tune after the backtest and the first season's scoring review log
 - Kick and Twitch API access (verify in step 4)
 - Catalyst Calendar: which event sources can be pulled for free, beyond admin entry
 - Existing fantasy-music or creator-prediction apps: research before launch
