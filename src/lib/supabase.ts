@@ -18,6 +18,23 @@ export type ConnectionStatus = 'missing-keys' | 'connected' | 'no-tables' | 'bad
 
 export type ConnectionResult = { status: ConnectionStatus; talentCount: number | null };
 
+export type LastUpdate = { finishedAt: string; talentUpdated: number; status: string } | null;
+
+/** When the daily data job last finished, and how many talent it updated. */
+export async function lastDataUpdate(): Promise<LastUpdate> {
+  if (!supabase) return null;
+  const { data } = await supabase
+    .from('job_runs')
+    .select('finished_at, talent_updated, status')
+    .eq('task', 'daily')
+    .not('finished_at', 'is', null)
+    .order('finished_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (!data) return null;
+  return { finishedAt: data.finished_at, talentUpdated: data.talent_updated, status: data.status };
+}
+
 /**
  * Pings the database by counting talent. "no-tables" means the keys work
  * but the schema hasn't been applied yet.

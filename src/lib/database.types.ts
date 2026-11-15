@@ -39,6 +39,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      job_runs: {
+        Row: {
+          errors: Json
+          finished_at: string | null
+          id: number
+          notes: string | null
+          snapshots_written: number
+          started_at: string
+          status: string
+          talent_updated: number
+          task: string
+        }
+        Insert: {
+          errors?: Json
+          finished_at?: string | null
+          id?: never
+          notes?: string | null
+          snapshots_written?: number
+          started_at?: string
+          status?: string
+          talent_updated?: number
+          task: string
+        }
+        Update: {
+          errors?: Json
+          finished_at?: string | null
+          id?: never
+          notes?: string | null
+          snapshots_written?: number
+          started_at?: string
+          status?: string
+          talent_updated?: number
+          task?: string
+        }
+        Relationships: []
+      }
       league_members: {
         Row: {
           joined_at: string
@@ -154,6 +190,44 @@ export type Database = {
             columns: ["owner_id"]
             isOneToOne: false
             referencedRelation: "scouts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      live_samples: {
+        Row: {
+          category: string | null
+          id: number
+          sampled_at: string
+          source: string
+          talent_account_id: string
+          title: string | null
+          viewers: number
+        }
+        Insert: {
+          category?: string | null
+          id?: never
+          sampled_at?: string
+          source: string
+          talent_account_id: string
+          title?: string | null
+          viewers: number
+        }
+        Update: {
+          category?: string | null
+          id?: never
+          sampled_at?: string
+          source?: string
+          talent_account_id?: string
+          title?: string | null
+          viewers?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "live_samples_talent_account_id_fkey"
+            columns: ["talent_account_id"]
+            isOneToOne: false
+            referencedRelation: "talent_accounts"
             referencedColumns: ["id"]
           },
         ]
@@ -780,9 +854,11 @@ export type Database = {
       }
     }
     Functions: {
+      call_daily_stats: { Args: { p_task: string }; Returns: number }
       is_admin: { Args: never; Returns: boolean }
       is_league_member: { Args: { p_league_id: string }; Returns: boolean }
       join_league: { Args: { p_invite_code: string }; Returns: string }
+      set_job_secret: { Args: { p_secret: string }; Returns: undefined }
       week_start_of: { Args: { ts: string }; Returns: string }
     }
     Enums: {

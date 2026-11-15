@@ -45,7 +45,9 @@
     "db:push": "supabase db push --remote=bafhhlncbuqdhkpvsydw",
     "db:types": "supabase gen types --lang=typescript --remote=bafhhlncbuqdhkpvsydw > src/lib/database.types.ts",
     "seed": "node --env-file=.env scripts/seed-talent.mts",
-    "seed:check": "node --env-file=.env scripts/seed-talent.mts --dry-run"
+    "seed:check": "node --env-file=.env scripts/seed-talent.mts --dry-run",
+    "job": "node --env-file=.env scripts/run-job.mts",
+    "functions:deploy": "supabase functions deploy daily-stats --remote=bafhhlncbuqdhkpvsydw --use-api --no-verify-jwt"
   },
   "private": true
 }

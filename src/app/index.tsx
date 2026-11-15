@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { checkConnection, type ConnectionResult, type ConnectionStatus } from '@/lib/supabase';
+import { checkConnection, lastDataUpdate, type ConnectionResult, type ConnectionStatus, type LastUpdate } from '@/lib/supabase';
+
+function describeUpdate(u: LastUpdate): string {
+  if (!u) return 'No data update yet';
+  const when = new Date(u.finishedAt);
+  const today = new Date().toDateString() === when.toDateString();
+  const day = today ? 'today' : when.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  const flag = u.status === 'ok' ? '' : ` (${u.status})`;
+  return `Last data update: ${day} · ${u.talentUpdated} talent updated${flag}`;
+}
 
 const STATUS_TEXT: Record<ConnectionStatus | 'checking', { label: string; color: string }> = {
   checking: { label: 'Checking database…', color: '#9CA3AF' },
@@ -15,9 +24,11 @@ const STATUS_TEXT: Record<ConnectionStatus | 'checking', { label: string; color:
 
 export default function HomeScreen() {
   const [result, setResult] = useState<ConnectionResult | null>(null);
+  const [update, setUpdate] = useState<LastUpdate>(null);
 
   useEffect(() => {
     checkConnection().then(setResult);
+    lastDataUpdate().then(setUpdate);
   }, []);
 
   const s = STATUS_TEXT[result?.status ?? 'checking'];
@@ -34,6 +45,7 @@ export default function HomeScreen() {
         <View style={[styles.dot, { backgroundColor: s.color }]} />
         <Text style={styles.statusText}>{label}</Text>
       </View>
+      {result?.status === 'connected' && <Text style={styles.subText}>{describeUpdate(update)}</Text>}
     </SafeAreaView>
   );
 }
@@ -46,4 +58,5 @@ const styles = StyleSheet.create({
   statusRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   dot: { width: 10, height: 10, borderRadius: 5 },
   statusText: { color: '#E4E4E7', fontSize: 15 },
+  subText: { color: '#71717A', fontSize: 13, marginTop: 8 },
 });
