@@ -1633,5 +1633,451 @@
         "url": "https://en.wikipedia.org/wiki/Arman_Tsarukyan"
       }
     ]
+  },
+  {
+    "name": "Ranveer Allahbadia",
+    "slug": "ranveer-allahbadia",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "self-improvement",
+      "india"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCPxMZIFE856tbTfdkdjzTSQ",
+        "url": "https://www.youtube.com/@beerbiceps",
+        "primary": true
+      }
+    ],
+    "note": "BeerBiceps channel. Runs several channels; main channel tracked."
+  },
+  {
+    "name": "The Iced Coffee Hour",
+    "slug": "the-iced-coffee-hour",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "finance",
+      "business"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCMSYZVlQmyG8_2MkIKzg0kw",
+        "url": "https://www.youtube.com/@theicedcoffeehour",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Graham Stephan",
+        "url": "https://en.wikipedia.org/wiki/Graham_Stephan"
+      }
+    ],
+    "note": "Hosted by Graham Stephan and Jack Selby. Wikipedia page is Graham Stephan."
+  },
+  {
+    "name": "Chris Williamson",
+    "slug": "chris-williamson",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "self-improvement"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCIaH-gZIVC432YRjNVvnyCA",
+        "url": "https://www.youtube.com/@chriswillx",
+        "primary": true
+      }
+    ],
+    "note": "Modern Wisdom podcast."
+  },
+  {
+    "name": "Deestroying",
+    "slug": "deestroying",
+    "position": "creator",
+    "tags": [
+      "sports",
+      "football",
+      "vlog"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC4mLlRa_dezwvytudo9s1sw",
+        "url": "https://www.youtube.com/@deestroying",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Donald De La Haye",
+        "url": "https://en.wikipedia.org/wiki/Donald_De_La_Haye"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Big on TikTok too."
+  },
+  {
+    "name": "Chunkz",
+    "slug": "chunkz",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "uk",
+      "beta squad"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCv-GNHtqM97EaU_i7gN_Ikw",
+        "url": "https://www.youtube.com/@chunkz",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Chunkz",
+        "url": "https://en.wikipedia.org/wiki/Chunkz"
+      }
+    ]
+  },
+  {
+    "name": "KSI",
+    "slug": "ksi",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "music",
+      "boxing",
+      "sidemen"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "url": "https://www.youtube.com/@ksi",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "KSI",
+        "url": "https://en.wikipedia.org/wiki/KSI"
+      }
+    ],
+    "note": "Main KSI channel tracked; Sidemen channels not included."
+  },
+  {
+    "name": "D'Vontay Friga",
+    "slug": "dvontay-friga",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "skits"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCeI--jINF0G1jmDVjT2PX_Q",
+        "url": "https://www.youtube.com/@dvontayfriga",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Likely biggest on TikTok/Instagram."
+  },
+  {
+    "name": "Andrew Huberman",
+    "slug": "andrew-huberman",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "science",
+      "health"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC2D2CMWXMOVWx7giW1n3LIg",
+        "url": "https://www.youtube.com/@hubermanlab",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Andrew Huberman",
+        "url": "https://en.wikipedia.org/wiki/Andrew_Huberman"
+      }
+    ],
+    "note": "Huberman Lab channel."
+  },
+  {
+    "name": "Jon Pardi",
+    "slug": "jon-pardi",
+    "position": "musician",
+    "tags": [
+      "country"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCFdIF7wqu8s2A_TdOysgVmw",
+        "url": "https://www.youtube.com/@jonpardi",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Jon Pardi",
+        "url": "https://www.last.fm/music/Jon+Pardi"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jon Pardi",
+        "url": "https://en.wikipedia.org/wiki/Jon_Pardi"
+      }
+    ]
+  },
+  {
+    "name": "Candace Owens",
+    "slug": "candace-owens",
+    "position": "creator",
+    "tags": [
+      "politics",
+      "commentary",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCkY4fdKOFk3Kiq7g5LLKYLw",
+        "url": "https://www.youtube.com/@candaceowenspodcast",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Candace Owens",
+        "url": "https://en.wikipedia.org/wiki/Candace_Owens"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. X and Instagram may be bigger than YouTube."
+  },
+  {
+    "name": "Ethan Chlebowski",
+    "slug": "ethan-chlebowski",
+    "position": "creator",
+    "tags": [
+      "food",
+      "cooking"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCDq5v10l4wkV5-ZBIJJFbzQ",
+        "url": "https://www.youtube.com/@ethanchlebowski",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "name": "Bradley Martyn",
+    "slug": "bradley-martyn",
+    "position": "creator",
+    "tags": [
+      "fitness",
+      "podcast"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCWTQG2aMDYKGDqYEGqJb1FA",
+        "url": "https://www.youtube.com/@bradleymartyn",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Instagram is likely bigger than YouTube."
+  },
+  {
+    "name": "SalimTheDream",
+    "slug": "salimthedream",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "pranks",
+      "nelk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC1Kb31O1t-zPeTUwZGwxZzw",
+        "url": "https://www.youtube.com/@saliimthedream",
+        "primary": true
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. NELK member. Handle is @saliimthedream (double i)."
+  },
+  {
+    "name": "One Night with Steiny",
+    "slug": "one-night-with-steiny",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "podcast",
+      "barstool"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCdd7HZYwU1YOE2lILZ5P2VQ",
+        "url": "https://www.youtube.com/@onenightwithsteiny",
+        "primary": true
+      }
+    ],
+    "note": "Barstool show hosted by Dan \"Steiny\" Steinberg (creator-led)."
+  },
+  {
+    "name": "Stephen A. Smith",
+    "slug": "stephen-a-smith",
+    "position": "creator",
+    "tags": [
+      "sports",
+      "commentary",
+      "tv"
+    ],
+    "status": "nominated",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC2OREBiIbDChxvmDeg30Bsg",
+        "url": "https://www.youtube.com/@mrstephenasmith"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Stephen A. Smith",
+        "url": "https://en.wikipedia.org/wiki/Stephen_A._Smith"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/stephenasmith",
+        "primary": true
+      }
+    ],
+    "hold_reason": "Main audience is ESPN TV and X/Instagram; YouTube (Straight Shooter, 1.4M) is secondary. X is not a data source."
+  },
+  {
+    "name": "TRIGGERnometry",
+    "slug": "triggernometry",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "politics",
+      "free speech"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC7oPkqeHTwuOZ5CZ-R9f-6w",
+        "url": "https://www.youtube.com/@triggerpod",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Konstantin Kisin",
+        "url": "https://en.wikipedia.org/wiki/Konstantin_Kisin"
+      }
+    ],
+    "note": "Hosted by Konstantin Kisin and Francis Foster. Wikipedia page is Kisin."
+  },
+  {
+    "name": "PBD Podcast",
+    "slug": "pbd-podcast",
+    "position": "creator",
+    "tags": [
+      "podcast",
+      "business",
+      "politics"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCGX7nGXpz-CmO_Arg-cgJ7A",
+        "url": "https://www.youtube.com/@pbdpodcast",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Patrick Bet-David",
+        "url": "https://en.wikipedia.org/wiki/Patrick_Bet-David"
+      }
+    ],
+    "note": "Hosted by Patrick Bet-David. Wikipedia page is his."
+  },
+  {
+    "name": "Jake Paul",
+    "slug": "jake-paul",
+    "position": "creator",
+    "tags": [
+      "entertainment",
+      "boxing"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCcgVECVN4OKV6DH1jLkqmcA",
+        "url": "https://www.youtube.com/@jakepaul",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jake Paul",
+        "url": "https://en.wikipedia.org/wiki/Jake_Paul"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Instagram may be bigger than YouTube."
+  },
+  {
+    "name": "Hasan Minhaj",
+    "slug": "hasan-minhaj",
+    "position": "creator",
+    "tags": [
+      "comedy",
+      "commentary"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCarEovlrD9QY-fy-Z6apIDQ",
+        "url": "https://www.youtube.com/@hasanminhaj",
+        "primary": true
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Hasan Minhaj",
+        "url": "https://en.wikipedia.org/wiki/Hasan_Minhaj"
+      }
+    ],
+    "provisional": true,
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Instagram may be bigger than YouTube."
   }
 ]

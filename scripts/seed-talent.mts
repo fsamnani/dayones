@@ -107,23 +107,27 @@ if (ytKey && ytIds.length) {
 
 const wikiTitles = seed.flatMap((t) => t.accounts.filter((a) => a.platform === 'wikipedia').map((a) => a.external_id!));
 const wikiFound = new Set<string>();
-if (wikiTitles.length) {
+// Wikipedia accepts at most 50 titles per request.
+for (let i = 0; i < wikiTitles.length; i += 50) {
+  const batch = wikiTitles.slice(i, i + 50);
   const res = await fetch(
-    `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(wikiTitles.join('|'))}&redirects=1&format=json`,
+    `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(batch.join('|'))}&redirects=1&format=json`,
     { headers: { 'User-Agent': 'DayOnesSeed/0.1 (fantasy league prototype; node)' } },
   );
-  if (res.ok) {
-    const data = (await res.json()) as { query: { pages: Record<string, { title: string; missing?: string }>; redirects?: { from: string; to: string }[] } };
-    const redirects = new Map((data.query.redirects ?? []).map((r) => [r.from, r.to]));
-    const present = new Set(Object.values(data.query.pages).filter((p) => p.missing === undefined).map((p) => p.title));
-    for (const t of wikiTitles) {
-      const final = redirects.get(t) ?? t;
-      if (present.has(final)) wikiFound.add(t);
-      else warnings.push(`Wikipedia page missing: ${t}`);
-      if (redirects.has(t)) warnings.push(`Wikipedia "${t}" redirects to "${final}", consider using that title`);
-    }
-  } else {
-    warnings.push(`Wikipedia check skipped (HTTP ${res.status})`);
+  const data = res.ok
+    ? ((await res.json()) as { query?: { pages: Record<string, { title: string; missing?: string }>; redirects?: { from: string; to: string }[] } })
+    : null;
+  if (!data?.query) {
+    warnings.push(`Wikipedia check skipped for ${batch.length} pages (HTTP ${res.status})`);
+    continue;
+  }
+  const redirects = new Map((data.query.redirects ?? []).map((r) => [r.from, r.to]));
+  const present = new Set(Object.values(data.query.pages).filter((p) => p.missing === undefined).map((p) => p.title));
+  for (const t of batch) {
+    const final = redirects.get(t) ?? t;
+    if (present.has(final)) wikiFound.add(t);
+    else warnings.push(`Wikipedia page missing: ${t}`);
+    if (redirects.has(t)) warnings.push(`Wikipedia "${t}" redirects to "${final}", consider using that title`);
   }
 }
 
