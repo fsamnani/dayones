@@ -1,6 +1,6 @@
 # DayOnes: Product Requirements (v1)
 
-Last updated: Nov 15, 2026
+Last updated: Nov 17, 2026
 Owner: Faraz
 
 ## 1. What DayOnes is
@@ -129,6 +129,7 @@ Before anyone plays, test the scoring formula against history.
 - Draft: snake draft within a league at season start, or open picks for solo players.
 - Weekly swaps: 2 add/drops per week, processed like waivers. Limits spray-and-pray.
 - Dropping a talent keeps their history in your Ledger but stops scoring.
+- **Points are pro-rated from the draft date.** A pick only earns points for the days it was actually on the roster: a pick held 2 of 7 days in a week earns 2/7 of that talent's points for the week. The draft day counts; the drop day does not. Days use Pacific time. Reason: otherwise a scout can see a talent spike mid-week, grab them Saturday, and collect the full week's points for a moment they did not call. That rewards reacting to news, the opposite of being a Day One.
 
 ## 8. v1 features (must have)
 1. Sign up / sign in
@@ -145,6 +146,8 @@ Before anyone plays, test the scoring formula against history.
 12. Nominate talent (admin approves)
 
 ## 9. v2 and later
+- **Research: Kalshi culture markets as an external litmus test** (kalshi.com/category/culture/people). Not a scoring input. If their markets say someone is hot and our Heat score disagrees, that is a formula bug to log in the scoring review log. Only covers a few famous people, so it cannot score a roster.
+- **Research: X/Twitter trending as a possible future Heat signal** (x.com/explore/tabs/entertainment). Blocker: X API access is expensive. Research the cost before committing.
 - AI weekly digest ("DayOnes Weekly: big movers, sleepers, who's trending down"), usable as a script for Faraz's own pundit videos
 - Feed from Reddit and X mentions, news headlines
 - Predictions ("Calls"): free-to-play yes/no questions like "Will X cross 1M subs by Dec 31?" with points, borrowing from prediction markets (clear resolution source, crowd odds shown) without real money

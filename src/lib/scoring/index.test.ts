@@ -9,6 +9,7 @@ import {
   dayOneMultiplier,
   growthPoints,
   heatPoints,
+  daysOnRoster,
   pacificDate,
   pickPoints,
   weekStartOf,
@@ -179,6 +180,38 @@ describe('Worked example (PRD 5e)', () => {
   it('total = growth + heat + milestones, then multiplier', () => {
     expect(weeklyTotal(30.1, 20, 40)).toBe(90.1);
     expect(pickPoints(90.1, 2)).toBe(180.2);
+  });
+});
+
+describe('Pro-rated pick points (PRD 7)', () => {
+  const week = '2026-11-16'; // Monday
+  it('a full week on the roster = 7 days, full points', () => {
+    expect(daysOnRoster(week, '2026-11-01', null)).toBe(7);
+    expect(pickPoints(30, 2, 7)).toBe(60);
+  });
+  it('picked Saturday = 2 days (Sat + Sun), 2/7 of the points', () => {
+    expect(daysOnRoster(week, '2026-11-21', null)).toBe(2);
+    expect(pickPoints(35, 1, 2)).toBe(10);
+  });
+  it('the draft day counts', () => {
+    expect(daysOnRoster(week, '2026-11-22', null)).toBe(1); // picked Sunday
+  });
+  it('the drop day does not count', () => {
+    expect(daysOnRoster(week, '2026-11-01', '2026-11-19')).toBe(3); // dropped Thursday: Mon-Wed
+  });
+  it('picked and dropped inside the same week', () => {
+    expect(daysOnRoster(week, '2026-11-17', '2026-11-20')).toBe(3); // Tue-Thu
+  });
+  it('a pick made after the week, or dropped before it, earns nothing', () => {
+    expect(daysOnRoster(week, '2026-11-25', null)).toBe(0);
+    expect(daysOnRoster(week, '2026-11-01', '2026-11-16')).toBe(0);
+    expect(pickPoints(50, 3, 0)).toBe(0);
+  });
+  it('the late grab cannot collect the full week', () => {
+    // Spike Wednesday, grabbed Saturday: a Day One holder gets 7/7, the late grab 2/7.
+    const total = 42;
+    expect(pickPoints(total, 1, daysOnRoster(week, '2026-11-01', null))).toBe(42);
+    expect(pickPoints(total, 1, daysOnRoster(week, '2026-11-21', null))).toBe(12);
   });
 });
 

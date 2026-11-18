@@ -196,9 +196,25 @@ export function weeklyTotal(growth: number, heat: number, milestones: number): n
   return round2(growth + heat + milestones);
 }
 
-/** A pick's weekly points: the talent's total times the pick's Day One multiplier. */
-export function pickPoints(talentTotal: number, multiplier: number): number {
-  return round2(talentTotal * multiplier);
+/**
+ * A pick's weekly points: the talent's total times the pick's Day One multiplier,
+ * pro-rated by the share of the week the pick was on the roster (PRD 7).
+ */
+export function pickPoints(talentTotal: number, multiplier: number, daysOnRoster = 7): number {
+  return round2(talentTotal * multiplier * (Math.max(0, Math.min(7, daysOnRoster)) / 7));
+}
+
+/**
+ * Days in a Monday-to-Sunday week that a pick was on the roster (Pacific dates).
+ * The draft day counts; the drop day does not. 0 if the pick missed the week.
+ */
+export function daysOnRoster(weekStart: string, pickedOn: string, droppedOn: string | null): number {
+  let days = 0;
+  for (let i = 0; i < 7; i++) {
+    const d = addDays(weekStart, i);
+    if (d >= pickedOn && (droppedOn === null || d < droppedOn)) days++;
+  }
+  return days;
 }
 
 // ---------------------------------------------------------------------------

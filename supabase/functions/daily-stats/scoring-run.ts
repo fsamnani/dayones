@@ -242,18 +242,17 @@ export async function runScoring(db: Db, opts: { today?: string; weeks?: string[
     if (error) throw new Error(`scores: ${error.message}`);
   }
 
-  // Pick points: a pick scores a week if it was on the roster when the week ended.
+  // Pick points: pro-rated by the days the pick was on the roster that week (PRD 7).
   const picks = await fetchAll<{ id: string; talent_id: string; multiplier: number; picked_at: string; dropped_at: string | null }>((from, to) =>
     db.from('picks').select('id, talent_id, multiplier, picked_at, dropped_at').order('id').range(from, to),
   );
   const pickRows: Record<string, unknown>[] = [];
   for (const r of outcome.scored) {
-    const weekEnd = S.addDays(r.week_start, 6);
     for (const p of picks) {
       if (p.talent_id !== r.talent_id) continue;
-      if (S.pacificDate(new Date(p.picked_at)) > weekEnd) continue;
-      if (p.dropped_at && S.pacificDate(new Date(p.dropped_at)) <= weekEnd) continue;
-      pickRows.push({ pick_id: p.id, week_start: r.week_start, base_points: r.total, multiplier: p.multiplier, points: S.pickPoints(r.total, Number(p.multiplier)), computed_at: now });
+      const days = S.daysOnRoster(r.week_start, S.pacificDate(new Date(p.picked_at)), p.dropped_at ? S.pacificDate(new Date(p.dropped_at)) : null);
+      if (days === 0) continue;
+      pickRows.push({ pick_id: p.id, week_start: r.week_start, base_points: r.total, multiplier: p.multiplier, points: S.pickPoints(r.total, Number(p.multiplier), days), computed_at: now });
     }
   }
   for (let i = 0; i < pickRows.length; i += 500) {
