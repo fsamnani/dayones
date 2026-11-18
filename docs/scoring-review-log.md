@@ -23,6 +23,28 @@ Copy this block to the top of the Entries section and fill it in.
 
 ## Entries
 
+### Backtest reverse test, run 2026-11-17 (4 MISSES)
+Known events checked against Heat v2 (Wikipedia only). None produced a clear spike in its own week.
+- **Flagrant, Akaash Singh departure confirmed by Andrew Schulz (May 6, 2026): MISS.** Tracked page (Andrew Schulz) was 0.79x normal that week, 11.5 Heat. Akaash Singh's own page was 2.71x normal (about 29 Heat if tracked). Likely cause: wrong page; a show needs every host's page. Action: proposed tracking all hosts, strongest wins. Status: open.
+- **Flagrant, Jasleen and Akaash Singh on the show (Dec 3, 2025): MISS in its week.** Schulz's page 0.89x (13.3 Heat); it spiked 5.58x the following week (39.8, Flagrant's top week) for reasons not found. Akaash's page was 2.14x in the event week. Same likely cause. Status: open.
+- **Jon Pardi, California Sunrise 10th Anniversary Edition (Jun 12, 2026): MISS.** 0.80x normal (11.8 Heat), 1.16x the week after. Likely cause: a reissue draws little public attention; may be correct by the north star. Status: open.
+- **KSI, announced leaving the Sidemen (May 31, 2026): WEAK.** 1.32x and 1.40x (19.0 and 19.8 Heat), 10th and 8th of his 51 weeks. Likely cause: creator news lives on YouTube/X, which the Wikipedia-only backtest cannot see. Action: re-check once YouTube Heat is live (~Dec 14). Status: open.
+
+### Week of 2026-06-29: Jon Pardi spike (UNRESOLVED)
+- **What the score said:** 4.2x normal on Wikipedia (35.7 Heat v2), a top-25 week of the year.
+- **Checked:** the California Sunrise reissue was June 12, over two weeks earlier, so it does not explain this week. A divorce report is the likelier cause (headline found, date unverified).
+- **Status:** unresolved.
+
+### Week of 2026-09-21: KSI spike (UNRESOLVED)
+- **What the score said:** 4.31x normal (36.1 Heat v2).
+- **Checked:** the Sidemen split was May 31 and does not explain September. Nearby but outside the week: a tribute to Sway (Sep 18) and Netflix's Outside premiere (Sep 28).
+- **Status:** unresolved.
+
+### Weeks of 2026-04-13 and 2026-10-12: Flagrant spikes (UNRESOLVED)
+- **What the score said:** 4.74x (37.4) and 4.27x (35.9) on Andrew Schulz's page.
+- **Checked:** not explained by the known Flagrant events. April may relate to Schulz's widely covered Trump criticism (Axios, Apr 10), which is about Schulz rather than the show.
+- **Status:** unresolved, pending the reverse test above (tracked page question).
+
 ### Week of 2026-11-09: Loe Shimmy viral song drop (HIT)
 - **Talent:** Loe Shimmy (musician)
 - **What happened in the world:** a viral song drop this week (confirmed by Faraz).

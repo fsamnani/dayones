@@ -40,23 +40,25 @@ const shortHistory = (wikiAccounts ?? []).filter((a) => !sampleIds.has(a.talent_
 const talentInfo = new Map(sample.map((a) => [a.talent_id, a.talent as unknown as { name: string; slug: string; position: string }]));
 
 // --- Weeks: every complete Monday-to-Sunday week from the first one with 4 weeks of baseline ----
-const firstWeek = S.addDays(S.weekStartOf(yearAgo), 7 * 5);
+const firstWeek = S.addDays(S.weekStartOf(yearAgo), 7);
 const lastWeek = S.addDays(S.weekStartOf(today), -7);
 const weeks: string[] = [];
 for (let w = firstWeek; w <= lastWeek; w = S.addDays(w, 7)) weeks.push(w);
 
-type Variant = { key: string; label: string; settingsOverride?: Partial<S.ScoringSettings>; floorOverride?: Record<string, number> };
+type Variant = { key: string; label: string; settingsOverride?: Partial<S.ScoringSettings>; floorOverride?: Record<string, number>; wikiShiftDays?: number };
 const variants: Variant[] = [
-  { key: 'current', label: 'Current settings (floor 100/day, baseline 8 weeks)' },
-  { key: 'floor50', label: 'Floor 50/day', floorOverride: { wikipedia: 50 } },
-  { key: 'floor200', label: 'Floor 200/day', floorOverride: { wikipedia: 200 } },
-  { key: 'baseline4', label: 'Baseline 4 weeks', settingsOverride: { baselineWeeks: 4 } },
+  { key: 'current', label: 'Heat v2: 15 + 10 x log2 (live)' },
+  { key: 'v1', label: 'Heat v1: 10 x log2, floored at 0 (old)', settingsOverride: { heatBaselinePoints: 0 } },
+  { key: 'shift', label: 'Heat v2, Wikipedia days shifted back one day', wikiShiftDays: -1 },
+  { key: 'floor50', label: 'Heat v2, floor 50/day', floorOverride: { wikipedia: 50 } },
+  { key: 'floor200', label: 'Heat v2, floor 200/day', floorOverride: { wikipedia: 200 } },
+  { key: 'baseline4', label: 'Heat v2, baseline 4 weeks', settingsOverride: { baselineWeeks: 4 } },
 ];
 
 type Row = { talent_id: string; name: string; position: string; week: string; heat: number; ratio: number | null; thisWeek: number | null; baseline: number | null; note?: string };
 const results: Record<string, Row[]> = {};
 for (const v of variants) {
-  const out = await runScoring(db, { today, weeks, write: false, force: true, settingsOverride: v.settingsOverride, floorOverride: v.floorOverride });
+  const out = await runScoring(db, { today, weeks, write: false, force: true, settingsOverride: v.settingsOverride, floorOverride: v.floorOverride, wikiShiftDays: v.wikiShiftDays });
   results[v.key] = out.scored
     .filter((r: ScoredWeek) => sampleIds.has(r.talent_id))
     .map((r: ScoredWeek) => {
@@ -116,9 +118,85 @@ function summarize(rows: Row[]) {
   };
 }
 
+function zeroBreakdown(rows: Row[]) {
+  const zero = rows.filter((r) => r.heat === 0);
+  return {
+    total: zero.length,
+    belowFloor: zero.filter((r) => r.note === 'below_noise_floor').length,
+    notEnoughHistory: zero.filter((r) => r.note === 'not_enough_history').length,
+    noData: zero.filter((r) => r.note === 'no_data_this_week').length,
+    veryQuiet: zero.filter((r) => !r.note).length,
+  };
+}
+
 const summaries = Object.fromEntries(variants.map((v) => [v.key, { label: v.label, ...summarize(results[v.key]) }]));
 
 const current = results.current;
+
+// --- Did the ranking of the top 25 change between v1 and v2? -----------------
+const key = (r: Row) => `${r.talent_id}|${r.week}`;
+const byRatio = (rows: Row[]) => [...rows].sort((a, b) => b.heat - a.heat || (b.ratio ?? 0) - (a.ratio ?? 0));
+const topV1 = byRatio(results.v1).slice(0, 25).map(key);
+const topV2 = byRatio(results.current).slice(0, 25).map(key);
+const rankCompare = {
+  sameSet: topV1.filter((k) => topV2.includes(k)).length,
+  sameOrder: topV1.every((k, i) => topV2[i] === k),
+  movedPositions: topV1.map((k, i) => ({ k, v1: i + 1, v2: topV2.indexOf(k) + 1 })).filter((x) => x.v1 !== x.v2),
+  tiedAtCap: results.current.filter((r) => r.heat >= 50).length,
+};
+
+// --- Reverse test: known events, did Heat fire? ------------------------------
+const knownEvents = [
+  { slug: 'flagrant', name: 'Flagrant', date: '2026-05-06', event: 'Akaash Singh departure confirmed by Andrew Schulz' },
+  { slug: 'flagrant', name: 'Flagrant', date: '2025-12-03', event: 'Jasleen and Akaash Singh on the show addressing the controversy' },
+  { slug: 'jon-pardi', name: 'Jon Pardi', date: '2026-06-12', event: 'California Sunrise 10th Anniversary Edition' },
+  { slug: 'ksi', name: 'KSI', date: '2026-05-31', event: 'Announced leaving the Sidemen' },
+];
+const slugToId = new Map([...talentInfo.entries()].map(([id, t]) => [t.slug, id]));
+const reverse = knownEvents.map((e) => {
+  const id = slugToId.get(e.slug);
+  const ws = S.weekStartOf(e.date);
+  const pick = (rows: Row[], w: string) => rows.find((r) => r.talent_id === id && r.week === w) ?? null;
+  const rows = id ? current.filter((r) => r.talent_id === id) : [];
+  const sorted = [...rows].sort((a, b) => b.heat - a.heat);
+  const rankOf = (w: string) => sorted.findIndex((r) => r.week === w) + 1;
+  const wk = (w: string) => { const r = pick(current, w); const v1 = pick(results.v1, w); return r ? { week: w, heat: r.heat, heatV1: v1?.heat ?? null, ratio: r.ratio, viewsPerDay: r.thisWeek, baseline: r.baseline, rankInYear: rankOf(w), weeksInYear: rows.length } : { week: w, missing: true }; };
+  return { ...e, eventWeek: wk(ws), nextWeek: wk(S.addDays(ws, 7)), medianHeat: quantile(rows.map((r) => r.heat), 0.5) };
+});
+
+// Context: Akaash Singh's own Wikipedia page (not tracked) around the two Flagrant events.
+async function pageviews(title: string, from: string, to: string) {
+  const u = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/${encodeURIComponent(title)}/daily/${from.replace(/-/g, '')}00/${to.replace(/-/g, '')}00`;
+  const res = await fetch(u, { headers: { 'User-Agent': 'DayOnes/0.1 (https://github.com/fsamnani/dayones; backtest)' } });
+  if (!res.ok) return null;
+  const d = (await res.json()) as { items: { timestamp: string; views: number }[] };
+  return d.items.map((i) => ({ date: `${i.timestamp.slice(0, 4)}-${i.timestamp.slice(4, 6)}-${i.timestamp.slice(6, 8)}`, views: i.views }));
+}
+const akaash = [];
+for (const e of knownEvents.filter((x) => x.slug === 'flagrant')) {
+  const ws = S.weekStartOf(e.date);
+  const series = await pageviews('Akaash_Singh', S.addDays(ws, -56), S.addDays(ws, 13));
+  if (!series) { akaash.push({ date: e.date, missing: true }); continue; }
+  const avg = (a: string, b: string) => { const v = series.filter((x) => x.date >= a && x.date <= b).map((x) => x.views); return v.length ? v.reduce((p, q) => p + q, 0) / v.length : 0; };
+  const base = avg(S.addDays(ws, -56), S.addDays(ws, -1));
+  const wkAvg = avg(ws, S.addDays(ws, 6));
+  const nextAvg = avg(S.addDays(ws, 7), S.addDays(ws, 13));
+  akaash.push({ date: e.date, baselinePerDay: S.round2(base), eventWeekPerDay: S.round2(wkAvg), nextWeekPerDay: S.round2(nextAvg), ratio: base ? S.round2(wkAvg / base) : null, heatIfTracked: base >= 100 ? S.round2(Math.min(50, Math.max(0, 15 + 10 * Math.log2(wkAvg / base)))) : null });
+}
+
+// --- Sunday-night shift: where do the known Sunday-night events land? ----------
+const sundayEvents = [
+  { name: 'Bad Bunny', event: 'Grammys (Sun Feb 1)', week: '2026-01-26' },
+  { name: 'Bad Bunny', event: 'Super Bowl halftime (Sun Feb 8)', week: '2026-02-02' },
+  { name: 'Karol G', event: 'Coachella weekend 1 (Sun Apr 12)', week: '2026-04-06' },
+  { name: 'KSI', event: 'Left the Sidemen (Sun May 31)', week: '2026-05-25' },
+];
+const nameToId = new Map([...talentInfo.entries()].map(([id, t]) => [t.name, id]));
+const shiftCheck = sundayEvents.map((e) => {
+  const id = nameToId.get(e.name);
+  const g = (rows: Row[], w: string) => rows.find((r) => r.talent_id === id && r.week === w)?.heat ?? null;
+  return { ...e, unshifted: { eventWeek: g(current, e.week), nextWeek: g(current, S.addDays(e.week, 7)) }, shifted: { eventWeek: g(results.shift, e.week), nextWeek: g(results.shift, S.addDays(e.week, 7)) } };
+});
 const topWeeks = [...current].sort((a, b) => b.heat - a.heat || (b.ratio ?? 0) - (a.ratio ?? 0)).slice(0, 25);
 const perTalent = [...new Set(current.map((r) => r.talent_id))].map((id) => {
   const rs = current.filter((r) => r.talent_id === id);
@@ -163,11 +241,18 @@ const out = {
   weeks: { first: weeks[0], last: weeks.at(-1), count: weeks.length },
   sample: { count: sampleIds.size, byPosition: Object.fromEntries(['musician', 'creator', 'streamer'].map((p) => [p, [...talentInfo.values()].filter((t) => t.position === p).length])), excludedShortHistory: shortHistory },
   summaries,
+  zeroBreakdown: Object.fromEntries(variants.map((v) => [v.key, zeroBreakdown(results[v.key])])),
+  rankCompare,
+  reverse,
+  akaash,
+  shiftCheck,
   topWeeks,
+  topWeeksV1: byRatio(results.v1).slice(0, 25),
   perTalent,
   weekly,
   musicianBalance: { medianYoutubeShare: quantile(musicianBalance.map((m) => m.youtubeShare), 0.5), rows: musicianBalance },
 };
 mkdirSync('docs/backtest', { recursive: true });
 writeFileSync('docs/backtest/results.json', JSON.stringify(out, null, 1));
+console.log(JSON.stringify({ rankCompare: { ...rankCompare, movedPositions: rankCompare.movedPositions.length }, reverse, akaash, shiftCheck, zero: out.zeroBreakdown }, null, 1));
 console.log(JSON.stringify({ sample: out.sample, weeks: out.weeks, summaries: Object.fromEntries(Object.entries(summaries).map(([k, v]) => [k, { ...v, histogram: undefined, neverEligible: v.neverEligible.length, mostlyBelowFloor: v.mostlyBelowFloor }])) }, null, 1));

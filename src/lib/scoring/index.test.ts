@@ -12,6 +12,7 @@ import {
   daysOnRoster,
   pacificDate,
   pickPoints,
+  talentSize,
   weekStartOf,
   weeklyTotal,
 } from './index';
@@ -75,22 +76,34 @@ describe('Growth points (PRD 5a)', () => {
 
 describe('Heat points (PRD 5b)', () => {
   const sig = (thisWeek: number | null, prior: (number | null)[], floor = 100, signal = 'wikipedia') => ({ signal, thisWeek, priorWeeks: prior, floor });
+  const heat = (thisWeek: number, base = 1000) => heatPoints([sig(thisWeek, eightWeeks(base))]).points;
 
-  it('2x normal = 10, 4x = 20, 8x = 30', () => {
-    expect(heatPoints([sig(2000, eightWeeks(1000))]).points).toBe(10);
-    expect(heatPoints([sig(4000, eightWeeks(1000))]).points).toBe(20);
-    expect(heatPoints([sig(8000, eightWeeks(1000))]).points).toBe(30);
+  it('half normal = 5, normal = 15, 2x = 25, 8x = 45', () => {
+    expect(heat(500)).toBe(5);
+    expect(heat(1000)).toBe(15);
+    expect(heat(2000)).toBe(25);
+    expect(heat(8000)).toBe(45);
+  });
+  it('a normal week is a stat line, not a zero', () => {
+    const h = heatPoints([sig(1000, eightWeeks(1000))]);
+    expect(h.points).toBe(15);
+    expect(h.winner).toBe('wikipedia');
   });
   it('is capped at 50', () => {
-    expect(heatPoints([sig(1_000_000, eightWeeks(1000))]).points).toBe(50);
+    expect(heat(1_000_000)).toBe(50);
   });
-  it('is floored at 0 for a quiet week', () => {
-    const h = heatPoints([sig(500, eightWeeks(1000))]);
-    expect(h.points).toBe(0);
-    expect(h.winner).toBeNull();
+  it('is floored at 0 for a very quiet week', () => {
+    expect(heat(300)).toBe(0); // 0.3x normal: 15 + 10*log2(0.3) = -2.4 -> 0
+    expect(heat(0)).toBe(0);
   });
-  it('a normal week = 0', () => {
-    expect(heatPoints([sig(1000, eightWeeks(1000))]).points).toBe(0);
+  it('ordering is the same as before: more attention, more points', () => {
+    const ratios = [0.4, 0.5, 1, 1.5, 2, 4, 8];
+    const pts = ratios.map((r) => heat(r * 1000));
+    expect([...pts].sort((a, b) => a - b)).toEqual(pts);
+  });
+  it('the 15 is a tuning knob', () => {
+    expect(heatPoints([sig(1000, eightWeeks(1000))], { ...DEFAULT_SETTINGS, heatBaselinePoints: 0 }).points).toBe(0);
+    expect(heatPoints([sig(2000, eightWeeks(1000))], { ...DEFAULT_SETTINGS, heatBaselinePoints: 0 }).points).toBe(10);
   });
   it('a small creator spike counts as much as a big one', () => {
     expect(heatPoints([sig(800, eightWeeks(200))]).points).toBe(heatPoints([sig(8_000_000, eightWeeks(2_000_000))]).points);
@@ -98,7 +111,7 @@ describe('Heat points (PRD 5b)', () => {
   it('strongest signal wins, not the average', () => {
     const h = heatPoints([sig(1100, eightWeeks(1000), 100, 'wikipedia'), sig(80_000, eightWeeks(10_000), 1000, 'youtube')]);
     expect(h.winner).toBe('youtube');
-    expect(h.points).toBe(30);
+    expect(h.points).toBe(45);
   });
   it('ignores a signal whose baseline is below its noise floor', () => {
     // 5 views/day jumping to 50 is a 10x "spike" that means nothing.
@@ -109,18 +122,18 @@ describe('Heat points (PRD 5b)', () => {
   it('a noisy tiny signal cannot beat a real one', () => {
     const h = heatPoints([sig(50, eightWeeks(5), 100, 'wikipedia'), sig(20_000, eightWeeks(10_000), 1000, 'youtube')]);
     expect(h.winner).toBe('youtube');
-    expect(h.points).toBe(10);
+    expect(h.points).toBe(25);
   });
   it('needs 4 weeks of history before a signal counts', () => {
     expect(heatPoints([sig(8000, [1000, 1000, 1000])]).signals[0].note).toBe('not_enough_history');
-    expect(heatPoints([sig(8000, [1000, 1000, 1000, 1000])]).points).toBe(30);
+    expect(heatPoints([sig(8000, [1000, 1000, 1000, 1000])]).points).toBe(45);
   });
   it('weeks with no data do not count as history', () => {
     expect(heatPoints([sig(8000, [1000, null, 1000, null, 1000])]).signals[0].note).toBe('not_enough_history');
   });
   it('uses at most the last 8 weeks for the baseline', () => {
     const h = heatPoints([sig(2000, [...eightWeeks(1000), 999_999, 999_999])]);
-    expect(h.points).toBe(10);
+    expect(h.points).toBe(25);
   });
   it('no data this week = 0', () => {
     expect(heatPoints([sig(null, eightWeeks(1000))]).points).toBe(0);
@@ -132,6 +145,28 @@ describe('Heat points (PRD 5b)', () => {
     const h = heatPoints([sig(4100, eightWeeks(1000))]);
     expect(h).toMatchObject({ winner: 'wikipedia', ratio: 4.1 });
     expect(h.signals[0]).toMatchObject({ baseline: 1000, weeksOfHistory: 8, eligible: true });
+  });
+});
+
+describe('Talent size (multiplier and size milestones)', () => {
+  it('musicians: the larger of YouTube subscribers and Last.fm listeners', () => {
+    expect(talentSize('musician', 'youtube', { youtube: 5_330, lastfm: 347_289 })).toBe(347_289);
+    expect(talentSize('musician', 'youtube', { youtube: 41_600_000, lastfm: 1_574_003 })).toBe(41_600_000);
+  });
+  it('RICEWINE moves from the 3x tier to 1.5x', () => {
+    expect(dayOneMultiplier(5_330)).toBe(3);
+    expect(dayOneMultiplier(talentSize('musician', 'youtube', { youtube: 5_330, lastfm: 347_289 })!)).toBe(1.5);
+  });
+  it('musicians with only one platform use that one', () => {
+    expect(talentSize('musician', 'youtube', { youtube: 75_400 })).toBe(75_400);
+  });
+  it('everyone else: their primary platform', () => {
+    expect(talentSize('streamer', 'twitch', { twitch: 95_501, youtube: 400_000 })).toBe(95_501);
+    expect(talentSize('creator', 'youtube', { youtube: 3_460 })).toBe(3_460);
+  });
+  it('no reading = null', () => {
+    expect(talentSize('creator', 'youtube', {})).toBeNull();
+    expect(talentSize('musician', null, {})).toBeNull();
   });
 });
 
@@ -232,7 +267,7 @@ describe('Weeks (Monday to Sunday, Pacific)', () => {
 
 describe('Settings', () => {
   it('defaults match the PRD', () => {
-    expect(DEFAULT_SETTINGS).toMatchObject({ growthPointsPer10x: 100, heatPointsPerDoubling: 10, heatCap: 50, baselineWeeks: 8, minBaselineWeeks: 4, minDraftableSize: 1000 });
+    expect(DEFAULT_SETTINGS).toMatchObject({ growthPointsPer10x: 100, heatPointsPerDoubling: 10, heatBaselinePoints: 15, heatCap: 50, baselineWeeks: 8, minBaselineWeeks: 4, minDraftableSize: 1000 });
   });
   it('the data job runs an identical copy of this file', () => {
     const here = readFileSync(new URL('./index.ts', import.meta.url), 'utf8');

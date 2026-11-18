@@ -21,6 +21,8 @@ export type ScoringSettings = {
   growthPointsPer10x: number;
   /** Heat: points each time attention doubles versus baseline. */
   heatPointsPerDoubling: number;
+  /** Heat: points for a normal week (attention equal to the talent's own baseline). */
+  heatBaselinePoints: number;
   /** Heat: maximum points per week. */
   heatCap: number;
   /** Heat: how many past weeks make up the baseline. */
@@ -38,6 +40,7 @@ export type ScoringSettings = {
 export const DEFAULT_SETTINGS: ScoringSettings = {
   growthPointsPer10x: 100,
   heatPointsPerDoubling: 10,
+  heatBaselinePoints: 15,
   heatCap: 50,
   baselineWeeks: 8,
   minBaselineWeeks: 4,
@@ -140,8 +143,9 @@ export type HeatResult = {
 };
 
 /**
- * Heat = the strongest signal's 10 x log2(this week / its own baseline),
- * floored at 0 and capped. 2x normal = 10, 4x = 20, 8x = 30.
+ * Heat = the strongest signal's 15 + 10 x log2(this week / its own baseline),
+ * clamped to 0..50. Every talent with an eligible signal gets a stat line every
+ * week, like a running back: half normal = 5, normal = 15, 2x = 25, 8x = 45.
  * Baseline = average of the talent's own previous weeks (up to 8).
  * A signal only counts with enough history and a baseline above its noise floor.
  */
@@ -154,7 +158,7 @@ export function heatPoints(signals: HeatSignalInput[], s: ScoringSettings = DEFA
     if (history.length < s.minBaselineWeeks || baseline === null) return { ...base, eligible: false, note: 'not_enough_history', ratio: null, points: 0 };
     if (baseline < sig.floor || baseline <= 0) return { ...base, eligible: false, note: 'below_noise_floor', ratio: null, points: 0 };
     const ratio = sig.thisWeek / baseline;
-    const raw = ratio > 0 ? s.heatPointsPerDoubling * Math.log2(ratio) : 0;
+    const raw = ratio > 0 ? s.heatBaselinePoints + s.heatPointsPerDoubling * Math.log2(ratio) : 0;
     return { ...base, eligible: true, ratio: round2(ratio), points: round2(Math.min(s.heatCap, Math.max(0, raw))) };
   });
 
@@ -162,7 +166,7 @@ export function heatPoints(signals: HeatSignalInput[], s: ScoringSettings = DEFA
   for (const r of results) {
     if (r.eligible && r.ratio !== null && (best === null || r.ratio > best.ratio!)) best = r;
   }
-  return { points: best?.points ?? 0, winner: best && best.points > 0 ? best.signal : null, ratio: best?.ratio ?? null, signals: results };
+  return { points: best?.points ?? 0, winner: best ? best.signal : null, ratio: best?.ratio ?? null, signals: results };
 }
 
 // ---------------------------------------------------------------------------
@@ -172,6 +176,23 @@ export function heatPoints(signals: HeatSignalInput[], s: ScoringSettings = DEFA
 export function crossedSizeMilestones(prevSize: number | null, currSize: number | null, s: ScoringSettings = DEFAULT_SETTINGS): SizeMilestone[] {
   if (prevSize === null || currSize === null) return [];
   return s.sizeMilestones.filter((m) => prevSize < m.threshold && currSize >= m.threshold);
+}
+
+// ---------------------------------------------------------------------------
+// Size: what the Day One multiplier and size milestones measure
+// ---------------------------------------------------------------------------
+/**
+ * A talent's size. Musicians: the larger of YouTube subscribers and Last.fm
+ * listeners (their biggest tracked platform). Everyone else: their primary
+ * platform's audience. Returns null when there is no reading.
+ */
+export function talentSize(position: string, primaryPlatform: string | null, audience: AudienceMap): number | null {
+  if (position === 'musician') {
+    const vals = [audience.youtube, audience.lastfm].filter((v): v is number => typeof v === 'number');
+    return vals.length ? Math.max(...vals) : null;
+  }
+  if (!primaryPlatform) return null;
+  return audience[primaryPlatform] ?? null;
 }
 
 // ---------------------------------------------------------------------------

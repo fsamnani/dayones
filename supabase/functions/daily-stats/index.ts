@@ -4,7 +4,7 @@
  *   ?task=daily          once a day: YouTube, Last.fm, Wikipedia (yesterday), Twitch followers,
  *                        plus yesterday's live-viewer roll-up for streamers
  *   ?task=live           every 20 minutes: who is live on Twitch and with how many viewers
- *   ?task=wiki-backfill  once: the last 12 months of Wikipedia pageviews (for the backtest)
+ *   ?task=wiki-backfill  once: Wikipedia pageviews history (default 366 days, &days=N up to 1100)
  *   ?task=score          recompute weekly scores (also runs at the end of every daily run).
  *                        Optional &week=YYYY-MM-DD (a Monday) and &force=1 to redo a final week
  *
@@ -55,7 +55,7 @@ Deno.serve(async (req) => {
       await score(run, {});
     } else if (task === 'live') await runLive(run);
     else if (task === 'score') await score(run, { week: params.get('week') ?? undefined, force: params.get('force') === '1' });
-    else await runWikiBackfill(run);
+    else await runWikiBackfill(run, Math.min(Number(params.get('days') ?? 366) || 366, 1100));
   } catch (e) {
     run.errors.push(`fatal: ${String(e)}`);
   }
@@ -225,9 +225,9 @@ async function runLive(run: Run) {
   for (const s of samples) run.talent.add(tw.find((a) => a.id === s.talent_account_id)!.talent_id);
 }
 
-async function runWikiBackfill(run: Run) {
+async function runWikiBackfill(run: Run, days = 366) {
   const wk = await trackedAccounts('wikipedia');
-  const results = await pool(wk, 1, (acc) => wikipediaPageviews(acc, daysAgoUtc(366), daysAgoUtc(1)));
+  const results = await pool(wk, 1, (acc) => wikipediaPageviews(acc, daysAgoUtc(days), daysAgoUtc(1)));
   const rows = settle(run, 'wikipedia backfill', results, wk).flat();
   await writeStats(run, rows);
   for (const r of rows) run.talent.add(wk.find((a) => a.id === r.talent_account_id)!.talent_id);

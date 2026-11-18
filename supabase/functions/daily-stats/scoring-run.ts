@@ -57,6 +57,8 @@ export type ScoringOptions = {
   settingsOverride?: Partial<S.ScoringSettings>;
   /** Backtests only: Heat noise floor per platform, applied to every position. */
   floorOverride?: Record<string, number>;
+  /** Backtests only: move Wikipedia (UTC) days by this many days before assigning them to weeks. */
+  wikiShiftDays?: number;
 };
 
 export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringOutcome> {
@@ -99,7 +101,8 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
   const series = new Map<string, Series>(); // `${account}|${metric}` -> date -> value
   for (const s of snaps) {
     const key = `${s.talent_account_id}|${s.metric}`;
-    (series.get(key) ?? series.set(key, new Map()).get(key)!).set(s.snapshot_date, Number(s.value));
+    const date = s.metric === 'pageviews' && opts.wikiShiftDays ? S.addDays(s.snapshot_date, opts.wikiShiftDays) : s.snapshot_date;
+    (series.get(key) ?? series.set(key, new Map()).get(key)!).set(date, Number(s.value));
   }
 
   const weekDays = (ws: string) => Array.from({ length: 7 }, (_, i) => S.addDays(ws, i)).filter((d) => d <= today);
@@ -192,19 +195,18 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
         }));
       const heat = S.heatPoints(signals, settings);
 
-      // Size milestones on the primary platform, logged once each.
+      // Size milestones, logged once each. Size = talentSize (musicians: larger of YouTube and Last.fm).
       const primary = accs.find((a) => a.is_primary);
-      const sizeMetric = primary ? AUDIENCE_METRIC[primary.platform_id] : undefined;
-      if (primary && sizeMetric) {
-        const before = latestIn(primary.id, sizeMetric, S.addDays(ws, -7));
-        const after = latestIn(primary.id, sizeMetric, ws);
+      {
+        const before = S.talentSize(t.position, primary?.platform_id ?? null, prevRaw);
+        const after = S.talentSize(t.position, primary?.platform_id ?? null, curr);
         for (const m of S.crossedSizeMilestones(before, after, settings)) {
           const kind = `crossed_${m.threshold}`;
           if (systemLogged.has(`${t.id}|${kind}`)) continue;
           systemLogged.add(`${t.id}|${kind}`);
           const occurred = today < weekEnd ? today : weekEnd;
           milestones.push({ talent_id: t.id, kind, points: m.points, occurred_on: occurred, logged_by: 'system' });
-          newMilestones.push({ talent_id: t.id, kind, points: m.points, occurred_on: occurred, logged_by: 'system', description: `Crossed ${m.threshold.toLocaleString('en-US')} on ${primary.platform_id}` });
+          newMilestones.push({ talent_id: t.id, kind, points: m.points, occurred_on: occurred, logged_by: 'system', description: `Crossed ${m.threshold.toLocaleString('en-US')} (${t.position === 'musician' ? 'YouTube or Last.fm, whichever is larger' : primary?.platform_id})` });
         }
       }
       const weekMilestones = milestones.filter((m) => m.talent_id === t.id && m.occurred_on >= ws && m.occurred_on <= weekEnd);

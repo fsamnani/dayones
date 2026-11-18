@@ -75,17 +75,29 @@ Solves the "Theo Von has Trump on his podcast and everyone is clipping it" week,
 - Each signal is compared to the talent's own trailing 8-week average (its baseline), so a small creator's spike counts as much as a big one's.
 - **Strongest signal wins:** Heat uses the single highest ratio-to-baseline among the talent's eligible signals, not an average. We are trying to catch a spike on any one platform.
 - **Noise floor:** a signal is only eligible if its 8-week baseline is above a minimum absolute level, so tiny numbers cannot produce fake multiples. Minimums live in the same config table. Starting values: Wikipedia pageviews 100/day, YouTube recent-upload views 1,000/week, peak live viewers 50.
-- Heat points = 10 x log2(this week / their baseline), floored at 0, capped at 50 per week. Plain English: 2x normal attention = 10 points, 4x = 20, 8x = 30.
+- **Heat points = 15 + 10 x log2(this week / their baseline), clamped between 0 and 50** (decided Nov 17, 2026). Every talent with a countable signal gets a stat line every week, like a running back who scores 4 on a bad week and 28 on a great one:
+
+  | Attention that week | Heat |
+  |---|---|
+  | Half their normal | 5 |
+  | Their normal | 15 |
+  | 2x normal | 25 |
+  | 8x normal | 45 |
+
+  The 15 is a tuning knob (`heatBaselinePoints` in the scoring settings). The earlier version (10 x log2, floored at 0) scored 0 in 68% of talent-weeks by construction, because most weeks are at or below a talent's own average. Scaling points up would not have fixed that: 3.6 x 0 is still 0.
+- **Open (Nov 17):** whether talent with no countable Heat signal get 0 or the normal-week 15, and whether the Day One multiplier applies to the 15. See the backtest report.
 
 ### 5c. Milestone bonuses (the touchdowns)
 Examples, values to tune:
 - First Billboard Hot 100 or Billboard 200 entry: 50
-- Crossing 100k / 1M / 10M on primary platform: 20 / 40 / 60
+- Crossing 100k / 1M / 10M in size (see 5d; for musicians the larger of YouTube and Last.fm): 20 / 40 / 60
 - Single video over 1M views in a week (for talent under 1M subs): 25
 - Award nomination (Streamer Awards, Grammys, etc.): 30
 Milestones are logged by the system where possible and by an admin in v1.
 
 ### 5d. Day One multiplier (locked at draft)
+Size at draft is the talent's audience on their biggest tracked platform. **For musicians, that is the larger of YouTube subscribers and Last.fm listeners** (decided Nov 17, 2026), the same measure as the eligibility rule. Size milestones (5c) use the same measure.
+
 | Size at draft | Multiplier |
 |---|---|
 | 1k to 10k | 3x |
@@ -113,6 +125,7 @@ Before anyone plays, test the scoring formula against history.
 - **Which signal wins the max, and how often?** If one signal wins most of the time, report it: the floors may be wrong or that signal too noisy.
 - **Double counting:** do fast-rising talent earn high Heat and high Growth for the same rise? Quantify the overlap so we can decide whether to adjust.
 - **Musician index balance:** how much of each musician's Audience Index comes from YouTube vs Last.fm (see 5a).
+- **Reverse test (recall):** for events known to be big, did Heat fire that week? A known big event with no Heat spike is a worse failure than a noisy week.
 - Write up the results, including a chart, so we can tune the formula before launch.
 
 **Limit:** YouTube and Last.fm only give current numbers, not history, so Growth cannot be backtested. We only build that history going forward, one day at a time, which is why the daily data job should start running as early as possible.
