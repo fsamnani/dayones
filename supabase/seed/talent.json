@@ -2079,5 +2079,599 @@
     ],
     "provisional": true,
     "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Instagram may be bigger than YouTube."
+  },
+  {
+    "name": "BerryCrepe",
+    "slug": "berrycrepe",
+    "position": "streamer",
+    "tags": [
+      "just chatting",
+      "sports",
+      "volleyball"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "188548235",
+        "url": "https://www.twitch.tv/berrycrepe",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 1803 viewers and 95497 followers. Twitch-first."
+  },
+  {
+    "name": "Nosiiree",
+    "slug": "nosiiree",
+    "position": "streamer",
+    "tags": [
+      "just chatting",
+      "basketball",
+      "music"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "848271250",
+        "url": "https://www.twitch.tv/nosiiree",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 875 viewers and 75205 followers. Twitch-first."
+  },
+  {
+    "name": "bigmonraph",
+    "slug": "bigmonraph",
+    "position": "streamer",
+    "tags": [
+      "just chatting",
+      "basketball"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "592893096",
+        "url": "https://www.twitch.tv/bigmonraph",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 236 viewers and 43328 followers. Twitch-first."
+  },
+  {
+    "name": "JalensWorld_",
+    "slug": "jalensworld",
+    "position": "streamer",
+    "tags": [
+      "just chatting",
+      "irl"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "643642250",
+        "url": "https://www.twitch.tv/jalensworld_",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 672 viewers and 29329 followers. Twitch-first."
+  },
+  {
+    "name": "notdebpark",
+    "slug": "notdebpark",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "travel",
+      "korea"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "1135759184",
+        "url": "https://www.twitch.tv/notdebpark",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 227 viewers and 25827 followers. Twitch-first."
+  },
+  {
+    "name": "DanielleAllard",
+    "slug": "danielleallard",
+    "position": "streamer",
+    "tags": [
+      "music",
+      "singing"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "505827356",
+        "url": "https://www.twitch.tv/danielleallard",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 152 viewers and 23698 followers. Twitch-first."
+  },
+  {
+    "name": "ira_aba",
+    "slug": "ira-aba",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "travel",
+      "music"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "710698890",
+        "url": "https://www.twitch.tv/ira_aba",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 161 viewers and 11528 followers. Twitch-first."
+  },
+  {
+    "name": "MOLLYSHEN",
+    "slug": "mollyshen",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "travel"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "848757900",
+        "url": "https://www.twitch.tv/mollyshen",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 166 viewers and 6239 followers. Twitch-first."
+  },
+  {
+    "name": "LaLa_CarpeDiem",
+    "slug": "lala-carpediem",
+    "position": "streamer",
+    "tags": [
+      "irl",
+      "travel",
+      "road trip"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "124194971",
+        "url": "https://www.twitch.tv/lala_carpediem",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 216 viewers and 5792 followers. Twitch-first."
+  },
+  {
+    "name": "dot_lvl",
+    "slug": "dot-lvl",
+    "position": "streamer",
+    "tags": [
+      "just chatting",
+      "gaming",
+      "souls"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "twitch",
+        "external_id": "97649666",
+        "url": "https://www.twitch.tv/dot_lvl",
+        "primary": true
+      }
+    ],
+    "note": "Found live on Twitch 2026-11-17 with 131 viewers and 8607 followers. Twitch-first."
+  },
+  {
+    "name": "marcy in china",
+    "slug": "marcy-in-china",
+    "position": "creator",
+    "tags": [
+      "vlog",
+      "china",
+      "culture"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC07vIkXu46cmE03xHe8zRcQ",
+        "url": "https://www.youtube.com/@marcyinchina",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 921,057 views on a 8,950-subscriber channel."
+  },
+  {
+    "name": "MustafaDraws",
+    "slug": "mustafadraws",
+    "position": "creator",
+    "tags": [
+      "video essay",
+      "art",
+      "comics",
+      "uk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCEW7-epGYkNGwBTC2Yb4mFQ",
+        "url": "https://www.youtube.com/@mustafadraws",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 361,558 views on a 4,100-subscriber channel."
+  },
+  {
+    "name": "Probably Paz",
+    "slug": "probably-paz",
+    "position": "creator",
+    "tags": [
+      "video essay",
+      "gaming",
+      "uk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCn_sjez6VLwS-3Er-tlFeMw",
+        "url": "https://www.youtube.com/@probablypaz",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 161,351 views on a 6,160-subscriber channel."
+  },
+  {
+    "name": "Travel Richard",
+    "slug": "travel-richard",
+    "position": "creator",
+    "tags": [
+      "travel",
+      "food",
+      "uk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCo1NfgQbAERn_YidqKqe0Hw",
+        "url": "https://www.youtube.com/@travelrichard",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 231,779 views on a 3,460-subscriber channel."
+  },
+  {
+    "name": "Truck Girl Kristina",
+    "slug": "truck-girl-kristina",
+    "position": "creator",
+    "tags": [
+      "vlog",
+      "trucking",
+      "lifestyle"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCO1XEOFcELCA_rQWaUlU0Ww",
+        "url": "https://www.youtube.com/@truckgirlkristina",
+        "primary": true
+      }
+    ],
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Found 2026-11-17: recent video 668,365 views on a 19,400-subscriber channel.",
+    "provisional": true
+  },
+  {
+    "name": "Camille Natalie",
+    "slug": "camille-natalie",
+    "position": "creator",
+    "tags": [
+      "vlog",
+      "lifestyle"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCxmY8q-RMq4l9QefNjbNMiQ",
+        "url": "https://www.youtube.com/@camillexnatalie",
+        "primary": true
+      }
+    ],
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Found 2026-11-17: recent video 498,759 views on a 24,500-subscriber channel.",
+    "provisional": true
+  },
+  {
+    "name": "dabota",
+    "slug": "dabota",
+    "position": "creator",
+    "tags": [
+      "commentary",
+      "pop culture",
+      "uk"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCgceUiBwSRBVH3EXqYW-FDQ",
+        "url": "https://www.youtube.com/@dabotaa",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 861,681 views on a 29,400-subscriber channel."
+  },
+  {
+    "name": "Hot Hand Theory",
+    "slug": "hot-hand-theory",
+    "position": "creator",
+    "tags": [
+      "sports",
+      "basketball",
+      "video essay"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCXwOXk03lnnJrXVNn7pZsoA",
+        "url": "https://www.youtube.com/@hothandtheory",
+        "primary": true
+      }
+    ],
+    "note": "Found 2026-11-17: recent video 142,863 views on a 18,700-subscriber channel."
+  },
+  {
+    "name": "Foot Doctor Zach Dubbs",
+    "slug": "foot-doctor-zach-dubbs",
+    "position": "creator",
+    "tags": [
+      "sneakers",
+      "health"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC5U2kEP9D7aAA5jQfC-nqPA",
+        "url": "https://www.youtube.com/@footdoctorzachdubbs",
+        "primary": true
+      }
+    ],
+    "note": "Provisional: YouTube may not be their biggest platform. Spike test decides before launch. Found 2026-11-17: recent video 202,142 views on a 26,700-subscriber channel.",
+    "provisional": true
+  },
+  {
+    "name": "RICEWINE",
+    "slug": "ricewine",
+    "position": "musician",
+    "tags": [
+      "indie",
+      "pop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC1160z0MXN7UkHepv5CQozw",
+        "url": "https://www.youtube.com/@ricewine",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "RICEWINE",
+        "url": "https://www.last.fm/music/RICEWINE"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Chezile (2026-11-17): 347,289 Last.fm listeners."
+  },
+  {
+    "name": "blackwinterwells",
+    "slug": "blackwinterwells",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "underground"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCdKicn37gS0w2IRRXsD435g",
+        "url": "https://www.youtube.com/@blackwinterwells",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "blackwinterwells",
+        "url": "https://www.last.fm/music/blackwinterwells"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to 2hollis (2026-11-17): 183,299 Last.fm listeners."
+  },
+  {
+    "name": "dad sports",
+    "slug": "dad-sports",
+    "position": "musician",
+    "tags": [
+      "indie",
+      "pop"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UC9Y14a32HjFGJwrJVXP55hg",
+        "url": "https://www.youtube.com/@dadsports",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "dad sports",
+        "url": "https://www.last.fm/music/dad+sports"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Chezile (2026-11-17): 209,612 Last.fm listeners."
+  },
+  {
+    "name": "Fana Hues",
+    "slug": "fana-hues",
+    "position": "musician",
+    "tags": [
+      "r&b",
+      "soul"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCeOnaxTFxiBC3cYupWAD4OQ",
+        "url": "https://www.youtube.com/@fanahues",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Fana Hues",
+        "url": "https://www.last.fm/music/Fana+Hues"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Fana Hues",
+        "url": "https://en.wikipedia.org/wiki/Fana_Hues"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Ravyn Lenae (2026-11-17): 162,917 Last.fm listeners."
+  },
+  {
+    "name": "Mackenzie Carpenter",
+    "slug": "mackenzie-carpenter",
+    "position": "musician",
+    "tags": [
+      "country"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCl94YL0Os0pta5M5-RP2aLQ",
+        "url": "https://www.youtube.com/@mackenziecarpenter",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Mackenzie Carpenter",
+        "url": "https://www.last.fm/music/Mackenzie+Carpenter"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Mackenzie Carpenter",
+        "url": "https://en.wikipedia.org/wiki/Mackenzie_Carpenter"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Ella Langley (2026-11-17): 28,664 Last.fm listeners."
+  },
+  {
+    "name": "Jim Legxacy",
+    "slug": "jim-legxacy",
+    "position": "musician",
+    "tags": [
+      "rap",
+      "uk",
+      "alternative"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCaysPT7A85wr9v0PWmrSC9A",
+        "url": "https://www.youtube.com/@jimlegxacy",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Jim Legxacy",
+        "url": "https://www.last.fm/music/Jim+Legxacy"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jim Legxacy",
+        "url": "https://en.wikipedia.org/wiki/Jim_Legxacy"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to EsDeeKid (2026-11-17): 253,870 Last.fm listeners."
+  },
+  {
+    "name": "Jordan Ward",
+    "slug": "jordan-ward",
+    "position": "musician",
+    "tags": [
+      "r&b"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCZYWR0NqGTFFE-vTbIBEUKg",
+        "url": "https://www.youtube.com/@jordanward",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Jordan Ward",
+        "url": "https://www.last.fm/music/Jordan+Ward"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Jordan Ward",
+        "url": "https://en.wikipedia.org/wiki/Jordan_Ward"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Steve Lacy (2026-11-17): 508,720 Last.fm listeners."
+  },
+  {
+    "name": "Ajebo Hustlers",
+    "slug": "ajebo-hustlers",
+    "position": "musician",
+    "tags": [
+      "afrobeats",
+      "duo"
+    ],
+    "status": "draftable",
+    "accounts": [
+      {
+        "platform": "youtube",
+        "external_id": "UCFLYBx3bAgAFkz1K1TDFi3g",
+        "url": "https://www.youtube.com/@ajebohustlers",
+        "primary": true
+      },
+      {
+        "platform": "lastfm",
+        "external_id": "Ajebo Hustlers",
+        "url": "https://www.last.fm/music/Ajebo+Hustlers"
+      },
+      {
+        "platform": "wikipedia",
+        "external_id": "Ajebo Hustlers",
+        "url": "https://en.wikipedia.org/wiki/Ajebo_Hustlers"
+      }
+    ],
+    "note": "Found via Last.fm similar artists to Omah Lay (2026-11-17): 17,707 Last.fm listeners."
   }
 ]
