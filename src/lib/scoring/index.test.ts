@@ -12,6 +12,7 @@ import {
   daysOnRoster,
   pacificDate,
   pickPoints,
+  signalsReady,
   talentSize,
   weekStartOf,
   weeklyTotal,
@@ -204,29 +205,59 @@ describe('Day One multiplier (PRD 5d)', () => {
 });
 
 describe('Worked example (PRD 5e)', () => {
+  const only = (growth: number) => ({ growth, heat: 0, milestones: 0 });
   it('small artist 5k to 50k at 3x = 300', () => {
     const g = growthPoints({ youtube: 5_000 }, { youtube: 50_000 }, W).points;
-    expect(pickPoints(weeklyTotal(g, 0, 0), dayOneMultiplier(5_000)!)).toBe(300);
+    expect(pickPoints(only(g), dayOneMultiplier(5_000)!)).toBe(300);
   });
   it('mid artist 200k to 400k at 1.5x = about 45', () => {
     const g = growthPoints({ youtube: 200_000 }, { youtube: 400_000 }, W).points;
-    expect(pickPoints(weeklyTotal(g, 0, 0), dayOneMultiplier(200_000)!)).toBeCloseTo(45.15, 1);
+    expect(pickPoints(only(g), dayOneMultiplier(200_000)!)).toBeCloseTo(45.15, 1);
   });
-  it('total = growth + heat + milestones, then multiplier', () => {
+  it('total = growth + heat + milestones', () => {
     expect(weeklyTotal(30.1, 20, 40)).toBe(90.1);
-    expect(pickPoints(90.1, 2)).toBe(180.2);
+  });
+});
+
+describe('Day One multiplier skips the normal-week 15 (PRD 5d)', () => {
+  it('a normal week is the same for a 3x and a 1x pick', () => {
+    const normal = { growth: 0, heat: 15, milestones: 0 };
+    expect(pickPoints(normal, 3)).toBe(15);
+    expect(pickPoints(normal, 1)).toBe(15);
+  });
+  it('a quiet week is never multiplied', () => {
+    expect(pickPoints({ growth: 0, heat: 13, milestones: 0 }, 3)).toBe(13);
+  });
+  it('only Heat above 15 is multiplied', () => {
+    // 8x spike = 45 Heat: 15 + 3 x 30 = 105 for a 3x pick, 45 for a 1x pick.
+    expect(pickPoints({ growth: 0, heat: 45, milestones: 0 }, 3)).toBe(105);
+    expect(pickPoints({ growth: 0, heat: 45, milestones: 0 }, 1)).toBe(45);
+  });
+  it('Growth and milestones are multiplied', () => {
+    expect(pickPoints({ growth: 30, heat: 15, milestones: 20 }, 2)).toBe(15 + 2 * 50);
+  });
+  it('shrinking is multiplied too', () => {
+    expect(pickPoints({ growth: -10, heat: 15, milestones: 0 }, 3)).toBe(-15);
+  });
+  it('a season of sitting still: 3x and 1x picks earn the same', () => {
+    const season = (m: number) => Array.from({ length: 12 }, () => pickPoints({ growth: 0, heat: 13, milestones: 0 }, m)).reduce((a, b) => a + b, 0);
+    expect(season(3)).toBe(season(1));
+  });
+  it('the 15 follows the tuning knob', () => {
+    expect(pickPoints({ growth: 0, heat: 20, milestones: 0 }, 2, 7, { ...DEFAULT_SETTINGS, heatBaselinePoints: 10 })).toBe(10 + 2 * 10);
   });
 });
 
 describe('Pro-rated pick points (PRD 7)', () => {
   const week = '2026-11-16'; // Monday
+  const flat = (heat: number) => ({ growth: 0, heat, milestones: 0 });
   it('a full week on the roster = 7 days, full points', () => {
     expect(daysOnRoster(week, '2026-11-01', null)).toBe(7);
-    expect(pickPoints(30, 2, 7)).toBe(60);
+    expect(pickPoints({ growth: 15, heat: 15, milestones: 0 }, 2, 7)).toBe(45);
   });
   it('picked Saturday = 2 days (Sat + Sun), 2/7 of the points', () => {
     expect(daysOnRoster(week, '2026-11-21', null)).toBe(2);
-    expect(pickPoints(35, 1, 2)).toBe(10);
+    expect(pickPoints(flat(35), 1, 2)).toBe(10);
   });
   it('the draft day counts', () => {
     expect(daysOnRoster(week, '2026-11-22', null)).toBe(1); // picked Sunday
@@ -240,13 +271,36 @@ describe('Pro-rated pick points (PRD 7)', () => {
   it('a pick made after the week, or dropped before it, earns nothing', () => {
     expect(daysOnRoster(week, '2026-11-25', null)).toBe(0);
     expect(daysOnRoster(week, '2026-11-01', '2026-11-16')).toBe(0);
-    expect(pickPoints(50, 3, 0)).toBe(0);
+    expect(pickPoints(flat(50), 3, 0)).toBe(0);
   });
   it('the late grab cannot collect the full week', () => {
     // Spike Wednesday, grabbed Saturday: a Day One holder gets 7/7, the late grab 2/7.
-    const total = 42;
-    expect(pickPoints(total, 1, daysOnRoster(week, '2026-11-01', null))).toBe(42);
-    expect(pickPoints(total, 1, daysOnRoster(week, '2026-11-21', null))).toBe(12);
+    expect(pickPoints(flat(42), 1, daysOnRoster(week, '2026-11-01', null))).toBe(42);
+    expect(pickPoints(flat(42), 1, daysOnRoster(week, '2026-11-21', null))).toBe(12);
+  });
+});
+
+describe('Signals ready (PRD 4)', () => {
+  const sig = (thisWeek: number | null, prior: (number | null)[], floor = 100) => ({ signal: 'wikipedia', thisWeek, priorWeeks: prior, floor });
+  it('ready with an audience reading and a countable Heat signal', () => {
+    const r = signalsReady({ youtube: 50_000 }, W, [heatPoints([sig(1000, eightWeeks(1000))])]);
+    expect(r).toEqual({ ready: true, note: 'Heat from wikipedia' });
+  });
+  it('not ready when the only Heat signal is below the floor', () => {
+    expect(signalsReady({ youtube: 50_000 }, W, [heatPoints([sig(50, eightWeeks(20))])])).toEqual({ ready: false, note: 'Heat signal below the noise floor' });
+  });
+  it('not ready while the Heat signal is still building history', () => {
+    expect(signalsReady({ youtube: 50_000 }, W, [heatPoints([sig(5000, [4000, 4000])])])).toEqual({ ready: false, note: 'Heat signal still building history' });
+  });
+  it('not ready with no Heat signal at all', () => {
+    expect(signalsReady({ youtube: 50_000 }, W, [heatPoints([])]).ready).toBe(false);
+  });
+  it('not ready without a Growth signal', () => {
+    expect(signalsReady({}, W, [heatPoints([sig(1000, eightWeeks(1000))])])).toEqual({ ready: false, note: 'No Growth signal yet' });
+  });
+  it('a countable signal in either of the two weeks checked is enough', () => {
+    const r = signalsReady({ youtube: 50_000 }, W, [heatPoints([sig(null, eightWeeks(1000))]), heatPoints([sig(1000, eightWeeks(1000))])]);
+    expect(r.ready).toBe(true);
   });
 });
 
@@ -267,7 +321,7 @@ describe('Weeks (Monday to Sunday, Pacific)', () => {
 
 describe('Settings', () => {
   it('defaults match the PRD', () => {
-    expect(DEFAULT_SETTINGS).toMatchObject({ growthPointsPer10x: 100, heatPointsPerDoubling: 10, heatBaselinePoints: 15, heatCap: 50, baselineWeeks: 8, minBaselineWeeks: 4, minDraftableSize: 1000 });
+    expect(DEFAULT_SETTINGS).toMatchObject({ growthPointsPer10x: 100, heatPointsPerDoubling: 10, heatBaselinePoints: 15, wikiShiftDays: -1, heatCap: 50, baselineWeeks: 8, minBaselineWeeks: 4, minDraftableSize: 1000 });
   });
   it('the data job runs an identical copy of this file', () => {
     const here = readFileSync(new URL('./index.ts', import.meta.url), 'utf8');

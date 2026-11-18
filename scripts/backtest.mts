@@ -47,9 +47,9 @@ for (let w = firstWeek; w <= lastWeek; w = S.addDays(w, 7)) weeks.push(w);
 
 type Variant = { key: string; label: string; settingsOverride?: Partial<S.ScoringSettings>; floorOverride?: Record<string, number>; wikiShiftDays?: number };
 const variants: Variant[] = [
-  { key: 'current', label: 'Heat v2: 15 + 10 x log2 (live)' },
-  { key: 'v1', label: 'Heat v1: 10 x log2, floored at 0 (old)', settingsOverride: { heatBaselinePoints: 0 } },
-  { key: 'shift', label: 'Heat v2, Wikipedia days shifted back one day', wikiShiftDays: -1 },
+  { key: 'current', label: 'Heat v2: 15 + 10 x log2, Wikipedia shifted one day (live)' },
+  { key: 'v1', label: 'Heat v1: 10 x log2, floored at 0 (old)', settingsOverride: { heatBaselinePoints: 0 }, wikiShiftDays: 0 },
+  { key: 'unshifted', label: 'Heat v2, Wikipedia days not shifted', wikiShiftDays: 0 },
   { key: 'floor50', label: 'Heat v2, floor 50/day', floorOverride: { wikipedia: 50 } },
   { key: 'floor200', label: 'Heat v2, floor 200/day', floorOverride: { wikipedia: 200 } },
   { key: 'baseline4', label: 'Heat v2, baseline 4 weeks', settingsOverride: { baselineWeeks: 4 } },
@@ -195,7 +195,7 @@ const nameToId = new Map([...talentInfo.entries()].map(([id, t]) => [t.name, id]
 const shiftCheck = sundayEvents.map((e) => {
   const id = nameToId.get(e.name);
   const g = (rows: Row[], w: string) => rows.find((r) => r.talent_id === id && r.week === w)?.heat ?? null;
-  return { ...e, unshifted: { eventWeek: g(current, e.week), nextWeek: g(current, S.addDays(e.week, 7)) }, shifted: { eventWeek: g(results.shift, e.week), nextWeek: g(results.shift, S.addDays(e.week, 7)) } };
+  return { ...e, unshifted: { eventWeek: g(results.unshifted, e.week), nextWeek: g(results.unshifted, S.addDays(e.week, 7)) }, shifted: { eventWeek: g(current, e.week), nextWeek: g(current, S.addDays(e.week, 7)) } };
 });
 const topWeeks = [...current].sort((a, b) => b.heat - a.heat || (b.ratio ?? 0) - (a.ratio ?? 0)).slice(0, 25);
 const perTalent = [...new Set(current.map((r) => r.talent_id))].map((id) => {

@@ -46,8 +46,8 @@ const shiftRows = r.shiftCheck
   .map((x) => `<tr><td>${esc(x.name)}</td><td class="ev">${esc(x.event)}</td><td class="num">${fmt(x.unshifted.eventWeek)}</td><td class="num">${fmt(x.unshifted.nextWeek)}</td><td class="num strong">${fmt(x.shifted.eventWeek)}</td><td class="num">${fmt(x.shifted.nextWeek)}</td></tr>`)
   .join('');
 
-const variants = ['current', 'v1', 'shift', 'floor50', 'floor200', 'baseline4'];
-const vLabel = { current: 'Heat v2 (live): 15 + 10 × log2', v1: 'Heat v1 (old): 10 × log2, floored at 0', shift: 'v2, Wikipedia days moved back one', floor50: 'v2, floor 50 views/day', floor200: 'v2, floor 200 views/day', baseline4: 'v2, 4-week baseline' };
+const variants = ['current', 'v1', 'unshifted', 'floor50', 'floor200', 'baseline4'];
+const vLabel = { current: 'Heat v2 (live): 15 + 10 × log2, Wikipedia shifted one day', v1: 'Heat v1 (old): 10 × log2, floored at 0', unshifted: 'v2, Wikipedia days not shifted', floor50: 'v2, floor 50 views/day', floor200: 'v2, floor 200 views/day', baseline4: 'v2, 4-week baseline' };
 const vRows = variants
   .map((k) => {
     const s = r.summaries[k];

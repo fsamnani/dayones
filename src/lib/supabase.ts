@@ -43,7 +43,8 @@ export async function checkConnection(): Promise<ConnectionResult> {
   if (!supabase) return { status: 'missing-keys', talentCount: null };
   try {
     // A real read (not a HEAD request): HEAD hides "table not found" errors.
-    const { count, error } = await supabase.from('talent').select('id', { count: 'exact' }).limit(1);
+    // The pool: talent that can be drafted today (curated draftable AND signals ready, PRD 4).
+    const { count, error } = await supabase.from('talent').select('id', { count: 'exact' }).eq('status', 'draftable').eq('signals_ready', true).limit(1);
     if (!error && count !== null) return { status: 'connected', talentCount: count };
     if (!error) return { status: 'no-tables', talentCount: null };
     if (error.code === 'PGRST205' || error.code === '42P01') return { status: 'no-tables', talentCount: null };

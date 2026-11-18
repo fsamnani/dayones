@@ -19,7 +19,7 @@ const AUDIENCE_METRIC: Record<string, string> = { youtube: 'subscribers', lastfm
 const HEAT_METRIC: Record<string, string> = { youtube: 'views_7d_uploads', wikipedia: 'pageviews', twitch: 'peak_live_viewers' };
 const METRICS = [...new Set([...Object.values(AUDIENCE_METRIC), ...Object.values(HEAT_METRIC)])];
 
-type AccountRow = { id: string; talent_id: string; platform_id: string; is_primary: boolean };
+type AccountRow = { id: string; talent_id: string; platform_id: string; is_primary: boolean; external_id: string | null; label: string | null };
 type TalentRow = { id: string; name: string; position: string };
 type Series = Map<string, number>; // date -> value
 
@@ -36,7 +36,8 @@ export type ScoredWeek = {
   is_final: boolean;
 };
 
-export type ScoringOutcome = { weeks: string[]; scored: ScoredWeek[]; milestonesLogged: number; pickRows: number; skippedFinal: string[] };
+export type Readiness = { talent_id: string; name: string; ready: boolean; note: string };
+export type ScoringOutcome = { weeks: string[]; scored: ScoredWeek[]; milestonesLogged: number; pickRows: number; skippedFinal: string[]; readiness: Readiness[] };
 
 async function fetchAll<T>(build: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>): Promise<T[]> {
   const out: T[] = [];
@@ -57,8 +58,10 @@ export type ScoringOptions = {
   settingsOverride?: Partial<S.ScoringSettings>;
   /** Backtests only: Heat noise floor per platform, applied to every position. */
   floorOverride?: Record<string, number>;
-  /** Backtests only: move Wikipedia (UTC) days by this many days before assigning them to weeks. */
+  /** Override the wikiShiftDays setting (backtests compare shifted and unshifted). */
   wikiShiftDays?: number;
+  /** Save each talent's signals-ready flag. Default: on for normal daily runs (write, no explicit weeks). */
+  updateReadiness?: boolean;
 };
 
 export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringOutcome> {
@@ -88,7 +91,7 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
   if (tErr) throw new Error(tErr.message);
   const talentIds = new Set((talent as TalentRow[]).map((t) => t.id));
 
-  const accounts = (await fetchAll<AccountRow>((from, to) => db.from('talent_accounts').select('id, talent_id, platform_id, is_primary').order('id').range(from, to))).filter((a) =>
+  const accounts = (await fetchAll<AccountRow>((from, to) => db.from('talent_accounts').select('id, talent_id, platform_id, is_primary, external_id, label').eq('is_active', true).order('id').range(from, to))).filter((a) =>
     talentIds.has(a.talent_id),
   );
   const accountsByTalent = new Map<string, AccountRow[]>();
@@ -101,7 +104,9 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
   const series = new Map<string, Series>(); // `${account}|${metric}` -> date -> value
   for (const s of snaps) {
     const key = `${s.talent_account_id}|${s.metric}`;
-    const date = s.metric === 'pageviews' && opts.wikiShiftDays ? S.addDays(s.snapshot_date, opts.wikiShiftDays) : s.snapshot_date;
+    // Wikipedia days are UTC; shift them for scoring buckets only (PRD 5b). Stored dates stay real.
+    const shift = opts.wikiShiftDays ?? settings.wikiShiftDays ?? 0;
+    const date = s.metric === 'pageviews' && shift ? S.addDays(s.snapshot_date, shift) : s.snapshot_date;
     (series.get(key) ?? series.set(key, new Map()).get(key)!).set(date, Number(s.value));
   }
 
@@ -129,8 +134,7 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
   };
 
   /** One weekly number per Heat signal. `complete` weeks need most of their days. */
-  const heatValue = (accs: AccountRow[], platform: string, ws: string, isBaselineWeek: boolean): number | null => {
-    const mine = accs.filter((a) => a.platform_id === platform);
+  const heatValue = (mine: AccountRow[], platform: string, ws: string, isBaselineWeek: boolean): number | null => {
     if (!mine.length) return null;
     let total: number | null = null;
     for (const a of mine) {
@@ -165,7 +169,8 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
   const { data: sysRows } = await db.from('milestones').select('talent_id, kind').eq('logged_by', 'system');
   const systemLogged = new Set((sysRows ?? []).map((r: { talent_id: string; kind: string }) => `${r.talent_id}|${r.kind}`));
 
-  const outcome: ScoringOutcome = { weeks, scored: [], milestonesLogged: 0, pickRows: 0, skippedFinal: [] };
+  const outcome: ScoringOutcome = { weeks, scored: [], milestonesLogged: 0, pickRows: 0, skippedFinal: [], readiness: [] };
+  const readinessInputs = new Map<string, { name: string; audience: S.AudienceMap; heats: S.HeatResult[] }>();
   const newMilestones: Record<string, unknown>[] = [];
 
   for (const ws of [...weeks].sort()) {
@@ -174,10 +179,6 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
     const isFinal = today >= S.addDays(ws, 8);
 
     for (const t of talent as TalentRow[]) {
-      if (finalKeys.has(`${t.id}|${ws}`) && !opts.force) {
-        outcome.skippedFinal.push(`${t.name} ${ws}`);
-        continue;
-      }
       const accs = accountsByTalent.get(t.id) ?? [];
       const w = weights[t.position] ?? {};
       const curr = audienceAt(accs, ws);
@@ -185,15 +186,24 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
       const prev = Object.keys(prevRaw).length ? prevRaw : null;
       const growth = S.growthPoints(prev, curr, w, settings);
 
-      const signals: S.HeatSignalInput[] = Object.keys(HEAT_METRIC)
-        .filter((p) => floors[t.position]?.[p] !== undefined && accs.some((a) => a.platform_id === p))
-        .map((p) => ({
-          signal: p,
-          thisWeek: heatValue(accs, p, ws, false),
-          priorWeeks: Array.from({ length: settings.baselineWeeks }, (_, k) => heatValue(accs, p, S.addDays(ws, -7 * (k + 1)), true)),
-          floor: floors[t.position][p],
-        }));
+      // One Heat signal per active account, so a show's host pages each count on their own
+      // and the strongest wins (PRD 5b). Named "wikipedia" or "wikipedia:<host>" when a
+      // talent has several pages on one platform.
+      const signals: S.HeatSignalInput[] = accs
+        .filter((a) => HEAT_METRIC[a.platform_id] && floors[t.position]?.[a.platform_id] !== undefined)
+        .map((a) => {
+          const several = accs.filter((x) => x.platform_id === a.platform_id).length > 1;
+          return {
+            signal: several ? `${a.platform_id}:${a.label ?? a.external_id ?? a.id}` : a.platform_id,
+            thisWeek: heatValue([a], a.platform_id, ws, false),
+            priorWeeks: Array.from({ length: settings.baselineWeeks }, (_, k) => heatValue([a], a.platform_id, S.addDays(ws, -7 * (k + 1)), true)),
+            floor: floors[t.position][a.platform_id],
+          };
+        });
       const heat = S.heatPoints(signals, settings);
+      const rd = readinessInputs.get(t.id) ?? readinessInputs.set(t.id, { name: t.name, audience: {}, heats: [] }).get(t.id)!;
+      rd.heats.push(heat);
+      if (Object.keys(curr).length) rd.audience = curr;
 
       // Size milestones, logged once each. Size = talentSize (musicians: larger of YouTube and Last.fm).
       const primary = accs.find((a) => a.is_primary);
@@ -214,6 +224,10 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
 
       const hasAnyData = Object.keys(curr).length > 0 || signals.some((s) => s.thisWeek !== null);
       if (!hasAnyData) continue;
+      if (finalKeys.has(`${t.id}|${ws}`) && !opts.force) {
+        outcome.skippedFinal.push(`${t.name} ${ws}`);
+        continue;
+      }
 
       const fullIndex = S.audienceIndex(curr, w);
       outcome.scored.push({
@@ -231,7 +245,22 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
     }
   }
 
+  // Signals ready (PRD 4): an audience reading plus a countable Heat signal in either week checked.
+  for (const t of talent as TalentRow[]) {
+    const rd = readinessInputs.get(t.id) ?? { name: t.name, audience: {}, heats: [] };
+    const r = S.signalsReady(rd.audience, weights[t.position] ?? {}, rd.heats);
+    outcome.readiness.push({ talent_id: t.id, name: t.name, ...r });
+  }
+
   if (!opts.write) return outcome;
+
+  if (opts.updateReadiness ?? !opts.weeks) {
+    const checkedAt = new Date().toISOString();
+    for (const r of outcome.readiness) {
+      const { error } = await db.from('talent').update({ signals_ready: r.ready, signals_note: r.note, signals_checked_at: checkedAt }).eq('id', r.talent_id);
+      if (error) throw new Error(`readiness: ${error.message}`);
+    }
+  }
 
   // --- Write ----------------------------------------------------------------
   if (newMilestones.length) {
@@ -266,7 +295,7 @@ export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringO
       if (p.talent_id !== r.talent_id) continue;
       const days = S.daysOnRoster(r.week_start, S.pacificDate(new Date(p.picked_at)), p.dropped_at ? S.pacificDate(new Date(p.dropped_at)) : null);
       if (days === 0) continue;
-      pickRows.push({ pick_id: p.id, week_start: r.week_start, base_points: r.total, multiplier: p.multiplier, points: S.pickPoints(r.total, Number(p.multiplier), days), computed_at: now });
+      pickRows.push({ pick_id: p.id, week_start: r.week_start, base_points: r.total, multiplier: p.multiplier, points: S.pickPoints({ growth: r.growth_points, heat: r.heat_points, milestones: r.milestone_points }, Number(p.multiplier), days, settings), computed_at: now });
     }
   }
   for (let i = 0; i < pickRows.length; i += 500) {

@@ -23,6 +23,8 @@ export type ScoringSettings = {
   heatPointsPerDoubling: number;
   /** Heat: points for a normal week (attention equal to the talent's own baseline). */
   heatBaselinePoints: number;
+  /** Wikipedia days are moved by this many days before being grouped into weeks (scoring only). */
+  wikiShiftDays: number;
   /** Heat: maximum points per week. */
   heatCap: number;
   /** Heat: how many past weeks make up the baseline. */
@@ -41,6 +43,7 @@ export const DEFAULT_SETTINGS: ScoringSettings = {
   growthPointsPer10x: 100,
   heatPointsPerDoubling: 10,
   heatBaselinePoints: 15,
+  wikiShiftDays: -1,
   heatCap: 50,
   baselineWeeks: 8,
   minBaselineWeeks: 4,
@@ -217,12 +220,42 @@ export function weeklyTotal(growth: number, heat: number, milestones: number): n
   return round2(growth + heat + milestones);
 }
 
+export type WeekParts = { growth: number; heat: number; milestones: number };
+
 /**
- * A pick's weekly points: the talent's total times the pick's Day One multiplier,
- * pro-rated by the share of the week the pick was on the roster (PRD 7).
+ * A pick's weekly points (PRD 5d, 7).
+ *
+ * The Day One multiplier rewards finding someone small who MOVES, not for being
+ * small. So the normal-week Heat (the first 15 points) is never multiplied; the
+ * multiplier applies to Growth, Heat above 15, and milestones. The result is
+ * pro-rated by the share of the week the pick was on the roster.
  */
-export function pickPoints(talentTotal: number, multiplier: number, daysOnRoster = 7): number {
-  return round2(talentTotal * multiplier * (Math.max(0, Math.min(7, daysOnRoster)) / 7));
+export function pickPoints(parts: WeekParts, multiplier: number, daysOnRoster = 7, s: ScoringSettings = DEFAULT_SETTINGS): number {
+  const base = Math.min(parts.heat, s.heatBaselinePoints);
+  const heatAbove = Math.max(0, parts.heat - s.heatBaselinePoints);
+  const share = Math.max(0, Math.min(7, daysOnRoster)) / 7;
+  return round2((base + multiplier * (parts.growth + heatAbove + parts.milestones)) * share);
+}
+
+// ---------------------------------------------------------------------------
+// Signals ready: can this talent be drafted? (PRD 4)
+// ---------------------------------------------------------------------------
+/**
+ * Draftable only when we can track at least one Growth signal (an audience
+ * reading) and one countable Heat signal (enough history, above its noise floor).
+ */
+export function signalsReady(audience: AudienceMap, weights: WeightMap, heats: HeatResult[]): { ready: boolean; note: string } {
+  const growth = Object.keys(audience).some((p) => (weights[p] ?? 0) > 0 && audience[p] > 0);
+  const heatSignal = heats.flatMap((h) => h.signals).find((x) => x.eligible);
+  if (!growth && !heatSignal) return { ready: false, note: 'No Growth or Heat signal yet' };
+  if (!growth) return { ready: false, note: 'No Growth signal yet' };
+  if (!heatSignal) {
+    const notes = new Set(heats.flatMap((h) => h.signals).map((x) => x.note));
+    if (notes.has('not_enough_history')) return { ready: false, note: 'Heat signal still building history' };
+    if (notes.has('below_noise_floor')) return { ready: false, note: 'Heat signal below the noise floor' };
+    return { ready: false, note: 'No Heat signal yet' };
+  }
+  return { ready: true, note: `Heat from ${heatSignal.signal}` };
 }
 
 /**

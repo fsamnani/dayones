@@ -16,7 +16,17 @@ import type { Database } from '../src/lib/database.types';
 type Position = Database['public']['Enums']['talent_position'];
 type Status = Database['public']['Enums']['talent_status'];
 
-type SeedAccount = { platform: string; url: string; external_id?: string; primary?: boolean };
+type SeedAccount = {
+  platform: string;
+  url: string;
+  external_id?: string;
+  primary?: boolean;
+  /** Whose page or channel this is, e.g. a show's host. */
+  label?: string;
+  /** false = switched off (e.g. a host who left). Omit to leave the database value alone. */
+  active?: boolean;
+  ended_on?: string;
+};
 type SeedTalent = {
   name: string;
   slug: string;
@@ -198,6 +208,9 @@ for (const t of seed) {
         url: a.url,
         external_id: a.external_id ?? null,
         is_primary: Boolean(a.primary),
+        label: a.label ?? null,
+        ...(a.active === undefined ? {} : { is_active: a.active }),
+        ...(a.ended_on === undefined ? {} : { ended_on: a.ended_on }),
       },
       { onConflict: 'talent_id,platform_id,url' },
     );

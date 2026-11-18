@@ -17,7 +17,12 @@ const SIGNAL_NAMES: Record<string, string> = { wikipedia: 'Wikipedia', youtube: 
 /** Plain-English reason for a score, e.g. "Heat: Wikipedia 3.7x normal". */
 function describeScore(t: TopScore): string {
   const parts: string[] = [];
-  if (t.heat > 0 && t.heatWinner) parts.push(`Heat: ${SIGNAL_NAMES[t.heatWinner] ?? t.heatWinner} ${t.heatRatio}x normal`);
+  if (t.heat > 0 && t.heatWinner) {
+    // "wikipedia:Andrew Schulz" -> "Wikipedia (Andrew Schulz)"
+    const [platform, who] = t.heatWinner.split(':');
+    const name = SIGNAL_NAMES[platform] ?? platform;
+    parts.push(`Heat: ${who ? `${name} (${who})` : name} ${t.heatRatio}x normal`);
+  }
   if (t.growth !== 0) parts.push(`Growth ${t.growth > 0 ? '+' : ''}${t.growth}`);
   if (t.milestones > 0) parts.push(`Milestones +${t.milestones}`);
   return parts.join(' · ') || 'A normal week';
@@ -58,7 +63,7 @@ export default function HomeScreen() {
 
   const s = STATUS_TEXT[result?.status ?? 'checking'];
   const label =
-    result?.status === 'connected' ? `${s.label} · ${result.talentCount} talent` : s.label;
+    result?.status === 'connected' ? `${s.label} · ${result.talentCount} talent ready to draft` : s.label;
 
   return (
     <SafeAreaView style={styles.container}>

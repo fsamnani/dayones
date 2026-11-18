@@ -1,6 +1,6 @@
 # DayOnes: Product Requirements (v1)
 
-Last updated: Nov 17, 2026
+Last updated: Nov 18, 2026
 Owner: Faraz
 
 ## 1. What DayOnes is
@@ -43,7 +43,7 @@ Faraz and 4 to 5 friends in SF who follow music, YouTube, and streamers, already
 - **Draftable only if the platform where they have the most audience is one we track.** A creator with 3k YouTube subs but millions on Instagram is not draftable, because their score would not reflect reality. They are marked **nominated, untrackable** and kept on the bench until a data source exists for their main platform.
   - For musicians, Last.fm stands in for their streaming audience (Spotify, Apple Music), since streaming is where a musician's audience lives. Their Instagram following does not disqualify them. *(Confirmed by Faraz, Nov 14, 2026.)*
   - Talent we are not sure about are draftable but **provisional** until the Instagram/TikTok spike test (section 10a) confirms their main platform.
-  - They must also have at least one Growth signal and one Heat signal we can track.
+  - They must also have at least one Growth signal and one Heat signal we can track. **This is checked every day by the data job** (decided Nov 18, 2026): talent whose Heat signal is not countable yet (still building its 4 weeks of history, or below its noise floor) are **not ready to draft** and are left out of the draft pool and the pool count in the app. When their signal switches on, they become draftable automatically. Nobody drafts a player who cannot score. A talent already on a roster keeps scoring if their signal later drops out.
 - **The bench:** nominated talent we cannot score yet, each with the reason (for example "main platform is Kick"). When a data source for their platform comes online, they move to draftable.
 - Minimum draftable size: 1,000 on their primary platform. Stops scouts farming tiny accounts.
 - No organizations or publications (Eater, NYTimes). Talent must be a person or group who is the face. Creator-led shows count (Impaulsive).
@@ -85,7 +85,10 @@ Solves the "Theo Von has Trump on his podcast and everyone is clipping it" week,
   | 8x normal | 45 |
 
   The 15 is a tuning knob (`heatBaselinePoints` in the scoring settings). The earlier version (10 x log2, floored at 0) scored 0 in 68% of talent-weeks by construction, because most weeks are at or below a talent's own average. Scaling points up would not have fixed that: 3.6 x 0 is still 0.
-- **Open (Nov 17):** whether talent with no countable Heat signal get 0 or the normal-week 15, and whether the Day One multiplier applies to the 15. See the backtest report.
+- **Talent with no countable Heat signal** are not given the 15; they are not draftable until a signal switches on (see 4).
+- **Shows: every current host's Wikipedia page counts as its own Heat signal, strongest wins** (decided Nov 18, 2026). Only current hosts: a host who leaves is switched off (kept in history, never deleted), so the show is not credited for their solo career. Akaash Singh left Flagrant in May 2026 and is switched off. Host lists are edited by an admin when a lineup changes (the `is_active` switch on the account).
+- **Wikipedia timing shift** (decided Nov 18, 2026): Wikipedia reports days in UTC and offers no hourly numbers for a single page, so US Sunday-night events (Grammys, Super Bowl, Coachella) land on the UTC Monday and would score a week late. For scoring buckets only, each Wikipedia day is moved back one day (`wikiShiftDays`). Tradeoff: Monday daytime views count toward the previous week. Stored data keeps the real dates, and any daily chart on a profile shows the real, unshifted dates.
+- **Coverage gap, even after YouTube and Twitch Heat switch on (~Dec 14):** we still have no Instagram or TikTok signal, which is where many small creators actually grow. The Apify spike test (10a) is the open path to closing that.
 
 ### 5c. Milestone bonuses (the touchdowns)
 Examples, values to tune:
@@ -96,6 +99,8 @@ Examples, values to tune:
 Milestones are logged by the system where possible and by an admin in v1.
 
 ### 5d. Day One multiplier (locked at draft)
+**The multiplier rewards finding someone small who moves, not for being small** (decided Nov 18, 2026). It applies to Growth, Heat above the normal-week 15, and milestones. The first 15 Heat points are never multiplied. Without this, a 3x pick would bank about 490 Heat points a season for simply existing versus 164 for a 1x pick, and the winning strategy would be drafting the 10 smallest eligible talent and waiting.
+
 Size at draft is the talent's audience on their biggest tracked platform. **For musicians, that is the larger of YouTube subscribers and Last.fm listeners** (decided Nov 17, 2026), the same measure as the eligibility rule. Size milestones (5c) use the same measure.
 
 | Size at draft | Multiplier |

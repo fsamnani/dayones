@@ -706,6 +706,9 @@ export type Database = {
           image_url: string | null
           name: string
           position: Database["public"]["Enums"]["talent_position"]
+          signals_checked_at: string | null
+          signals_note: string | null
+          signals_ready: boolean
           slug: string
           status: Database["public"]["Enums"]["talent_status"]
           tags: string[]
@@ -717,6 +720,9 @@ export type Database = {
           image_url?: string | null
           name: string
           position: Database["public"]["Enums"]["talent_position"]
+          signals_checked_at?: string | null
+          signals_note?: string | null
+          signals_ready?: boolean
           slug: string
           status?: Database["public"]["Enums"]["talent_status"]
           tags?: string[]
@@ -728,6 +734,9 @@ export type Database = {
           image_url?: string | null
           name?: string
           position?: Database["public"]["Enums"]["talent_position"]
+          signals_checked_at?: string | null
+          signals_note?: string | null
+          signals_ready?: boolean
           slug?: string
           status?: Database["public"]["Enums"]["talent_status"]
           tags?: string[]
@@ -737,27 +746,36 @@ export type Database = {
       talent_accounts: {
         Row: {
           created_at: string
+          ended_on: string | null
           external_id: string | null
           id: string
+          is_active: boolean
           is_primary: boolean
+          label: string | null
           platform_id: string
           talent_id: string
           url: string
         }
         Insert: {
           created_at?: string
+          ended_on?: string | null
           external_id?: string | null
           id?: string
+          is_active?: boolean
           is_primary?: boolean
+          label?: string | null
           platform_id: string
           talent_id: string
           url: string
         }
         Update: {
           created_at?: string
+          ended_on?: string | null
           external_id?: string | null
           id?: string
+          is_active?: boolean
           is_primary?: boolean
+          label?: string | null
           platform_id?: string
           talent_id?: string
           url?: string

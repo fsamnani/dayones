@@ -23,12 +23,13 @@ Copy this block to the top of the Entries section and fill it in.
 
 ## Entries
 
-### Backtest reverse test, run 2026-11-17 (4 MISSES)
+### Backtest reverse test, run 2026-11-17 (COVERAGE GAPS, re-test 2026-12-14)
 Known events checked against Heat v2 (Wikipedia only). None produced a clear spike in its own week.
-- **Flagrant, Akaash Singh departure confirmed by Andrew Schulz (May 6, 2026): MISS.** Tracked page (Andrew Schulz) was 0.79x normal that week, 11.5 Heat. Akaash Singh's own page was 2.71x normal (about 29 Heat if tracked). Likely cause: wrong page; a show needs every host's page. Action: proposed tracking all hosts, strongest wins. Status: open.
-- **Flagrant, Jasleen and Akaash Singh on the show (Dec 3, 2025): MISS in its week.** Schulz's page 0.89x (13.3 Heat); it spiked 5.58x the following week (39.8, Flagrant's top week) for reasons not found. Akaash's page was 2.14x in the event week. Same likely cause. Status: open.
+**Classification (Faraz, 2026-11-18): the Flagrant and KSI results are coverage gaps, not formula failures.** That news lives in YouTube views, which the Wikipedia-only backtest cannot see. Re-run this reverse test on 2026-12-14, once YouTube and Twitch Heat are live, before treating any of these as formula misses.
+- **Flagrant, Akaash Singh departure confirmed by Andrew Schulz (May 6, 2026): COVERAGE GAP.** Tracked page (Andrew Schulz) was 0.79x normal that week, 11.5 Heat. Akaash Singh's own page was 2.71x normal (about 29 Heat if tracked). Note: tracking every current host is now built, but Akaash had left by then, so his page would not count; this event can only be caught on YouTube. Status: re-test 2026-12-14.
+- **Flagrant, Jasleen and Akaash Singh on the show (Dec 3, 2025): COVERAGE GAP.** Schulz's page 0.89x (13.3 Heat); it spiked 5.58x the following week (39.8, Flagrant's top week) for reasons not found. Akaash's page was 2.14x in the event week. Status: re-test 2026-12-14.
 - **Jon Pardi, California Sunrise 10th Anniversary Edition (Jun 12, 2026): MISS.** 0.80x normal (11.8 Heat), 1.16x the week after. Likely cause: a reissue draws little public attention; may be correct by the north star. Status: open.
-- **KSI, announced leaving the Sidemen (May 31, 2026): WEAK.** 1.32x and 1.40x (19.0 and 19.8 Heat), 10th and 8th of his 51 weeks. Likely cause: creator news lives on YouTube/X, which the Wikipedia-only backtest cannot see. Action: re-check once YouTube Heat is live (~Dec 14). Status: open.
+- **KSI, announced leaving the Sidemen (May 31, 2026): COVERAGE GAP.** 1.32x and 1.40x (19.0 and 19.8 Heat), 10th and 8th of his 51 weeks. Likely cause: creator news lives on YouTube/X, which the Wikipedia-only backtest cannot see. Status: re-test 2026-12-14.
 
 ### Week of 2026-06-29: Jon Pardi spike (UNRESOLVED)
 - **What the score said:** 4.2x normal on Wikipedia (35.7 Heat v2), a top-25 week of the year.

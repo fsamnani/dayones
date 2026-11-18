@@ -75,7 +75,8 @@ Deno.serve(async (req) => {
 async function score(run: Run, opts: { week?: string; force?: boolean }) {
   try {
     const out = await runScoring(db, { weeks: opts.week ? [opts.week] : undefined, force: opts.force, write: true });
-    run.notes = `scored ${out.scored.length} talent-weeks for ${out.weeks.join(', ')}; ${out.milestonesLogged} milestones; ${out.pickRows} pick rows`;
+    const ready = out.readiness.filter((r) => r.ready).length;
+    run.notes = `scored ${out.scored.length} talent-weeks for ${out.weeks.join(', ')}; ${out.milestonesLogged} milestones; ${out.pickRows} pick rows; ${ready}/${out.readiness.length} signals ready`;
     if (run.talent.size === 0) for (const r of out.scored) run.talent.add(r.talent_id);
   } catch (e) {
     run.errors.push(`scoring: ${String(e)}`);
@@ -86,6 +87,7 @@ async function trackedAccounts(platform?: string): Promise<Account[]> {
   let q = db
     .from('talent_accounts')
     .select('id, talent_id, platform_id, external_id, url, talent!inner(status)')
+    .eq('is_active', true)
     .neq('talent.status', 'retired')
     .not('external_id', 'is', null);
   if (platform) q = q.eq('platform_id', platform);
