@@ -48,7 +48,18 @@ async function fetchAll<T>(build: (from: number, to: number) => PromiseLike<{ da
   }
 }
 
-export async function runScoring(db: Db, opts: { today?: string; weeks?: string[]; write: boolean; force?: boolean }): Promise<ScoringOutcome> {
+export type ScoringOptions = {
+  today?: string;
+  weeks?: string[];
+  write: boolean;
+  force?: boolean;
+  /** Backtests only: try other settings without touching the database config. */
+  settingsOverride?: Partial<S.ScoringSettings>;
+  /** Backtests only: Heat noise floor per platform, applied to every position. */
+  floorOverride?: Record<string, number>;
+};
+
+export async function runScoring(db: Db, opts: ScoringOptions): Promise<ScoringOutcome> {
   const today = opts.today ?? S.pacificDate();
   const thisWeek = S.weekStartOf(today);
   const weeks = opts.weeks ?? [S.addDays(thisWeek, -7), thisWeek];
@@ -59,6 +70,7 @@ export async function runScoring(db: Db, opts: { today?: string; weeks?: string[
   if (sErr) throw new Error(sErr.message);
   const settings: S.ScoringSettings = { ...S.DEFAULT_SETTINGS };
   for (const r of settingRows ?? []) (settings as Record<string, unknown>)[r.key] = r.value;
+  Object.assign(settings, opts.settingsOverride ?? {});
 
   const { data: platformRows, error: pErr } = await db.from('scoring_platform_config').select('position, platform_id, audience_weight, heat_floor');
   if (pErr) throw new Error(pErr.message);
@@ -66,7 +78,7 @@ export async function runScoring(db: Db, opts: { today?: string; weeks?: string[
   const floors: Record<string, Record<string, number>> = {};
   for (const r of platformRows ?? []) {
     if (r.audience_weight !== null) (weights[r.position] ??= {})[r.platform_id] = Number(r.audience_weight);
-    if (r.heat_floor !== null) (floors[r.position] ??= {})[r.platform_id] = Number(r.heat_floor);
+    if (r.heat_floor !== null) (floors[r.position] ??= {})[r.platform_id] = Number(opts.floorOverride?.[r.platform_id] ?? r.heat_floor);
   }
 
   // --- Talent, accounts, stats ----------------------------------------------

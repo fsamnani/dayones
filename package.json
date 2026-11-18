@@ -51,7 +51,8 @@
     "functions:deploy": "npm run scoring:sync && supabase functions deploy daily-stats --remote=bafhhlncbuqdhkpvsydw --use-api --no-verify-jwt",
     "test": "vitest run",
     "scoring:sync": "cp src/lib/scoring/index.ts supabase/functions/_shared/scoring.ts",
-    "score:check": "node --env-file=.env scripts/score-dry-run.mts"
+    "score:check": "node --env-file=.env scripts/score-dry-run.mts",
+    "backtest": "node --env-file=.env scripts/backtest.mts"
   },
   "private": true
 }
